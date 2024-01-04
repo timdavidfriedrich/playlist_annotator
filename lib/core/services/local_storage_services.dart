@@ -10,11 +10,11 @@ class LocalStorageService extends GetxService {
     return this;
   }
 
-  Future<String?> loadSecureString(String key) async {
-    return await _prefs.getString(key);
+  Future<void> saveSpotifyRefreshToken(String refreshToken) async {
+    return await _prefs.putString("spotify_refresh_token", refreshToken);
   }
 
-  Future<void> saveSecureString(String key, String value) async {
-    return await _prefs.putString(key, value);
+  Future<String?> loadSpotifyRefreshToken() async {
+    return await _prefs.getString("spotify_refresh_token");
   }
 }
