@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:playlist_annotator/core/services/spotify_service.dart';
-import 'package:playlist_annotator/core/models/playlist.dart';
-import 'package:playlist_annotator/core/models/spotify_playlist_item.dart';
-import 'package:playlist_annotator/home/pages/spotify_playlist_chooser_page.dart';
-import 'package:playlist_annotator/playlist/pages/playlist_page.dart';
+import 'package:playlist_annotator/features/core/services/spotify_service.dart';
+import 'package:playlist_annotator/features/core/models/playlist.dart';
+import 'package:playlist_annotator/features/core/models/spotify_playlist_item.dart';
+import 'package:playlist_annotator/features/home/pages/spotify_playlist_chooser_page.dart';
+import 'package:playlist_annotator/features/playlist/pages/playlist_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

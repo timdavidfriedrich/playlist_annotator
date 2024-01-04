@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:playlist_annotator/core/models/spotify_playlist_item.dart';
+import 'package:playlist_annotator/features/core/models/spotify_playlist_item.dart';
 
 class SpotifyPlaylistTile extends StatelessWidget {
   final SpotifyPlaylistItem spotifyPlaylistItem;

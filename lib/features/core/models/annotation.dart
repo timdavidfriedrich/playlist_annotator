@@ -1,6 +1,6 @@
-import 'package:playlist_annotator/core/models/playlist.dart';
-import 'package:playlist_annotator/core/models/song.dart';
-import 'package:playlist_annotator/core/models/user.dart';
+import 'package:playlist_annotator/features/core/models/playlist.dart';
+import 'package:playlist_annotator/features/core/models/song.dart';
+import 'package:playlist_annotator/features/core/models/user.dart';
 
 class Annotation {
   final String id;

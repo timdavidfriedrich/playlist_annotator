@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:playlist_annotator/core/services/auth_service.dart';
+import 'package:playlist_annotator/features/core/services/auth_service.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});

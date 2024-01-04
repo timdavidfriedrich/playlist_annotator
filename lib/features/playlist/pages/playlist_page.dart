@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:log/log.dart';
-import 'package:playlist_annotator/core/models/playlist.dart';
-import 'package:playlist_annotator/playlist/widgets/song_tile.dart';
+import 'package:playlist_annotator/features/core/models/playlist.dart';
+import 'package:playlist_annotator/features/playlist/widgets/song_tile.dart';
 
 class PlaylistPage extends StatefulWidget {
   final Playlist playlist;

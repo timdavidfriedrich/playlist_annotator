@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:playlist_annotator/core/localization/messages/de_de.dart';
-import 'package:playlist_annotator/core/localization/messages/en_us.dart';
+import 'package:playlist_annotator/features/core/localization/messages/de_de.dart';
+import 'package:playlist_annotator/features/core/localization/messages/en_us.dart';
 
 class Messages extends Translations {
   @override

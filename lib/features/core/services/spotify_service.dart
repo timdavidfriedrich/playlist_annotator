@@ -4,10 +4,10 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:log/log.dart';
-import 'package:playlist_annotator/core/models/playlist.dart';
-import 'package:playlist_annotator/core/models/spotify_playlist_item.dart';
-import 'package:playlist_annotator/core/services/local_storage_services.dart';
-import 'package:playlist_annotator/core/services/user_service.dart';
+import 'package:playlist_annotator/features/core/models/playlist.dart';
+import 'package:playlist_annotator/features/core/models/spotify_playlist_item.dart';
+import 'package:playlist_annotator/features/core/services/local_storage_services.dart';
+import 'package:playlist_annotator/features/core/services/user_service.dart';
 
 class SpotifyService extends GetxService {
   final clientId = '81ae522634cb431daed4230728ed0a76';

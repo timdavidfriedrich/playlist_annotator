@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:playlist_annotator/core/services/spotify_service.dart';
-import 'package:playlist_annotator/core/models/spotify_playlist_item.dart';
-import 'package:playlist_annotator/home/widgets/spotify_playlist_tile.dart';
+import 'package:playlist_annotator/features/core/services/spotify_service.dart';
+import 'package:playlist_annotator/features/core/models/spotify_playlist_item.dart';
+import 'package:playlist_annotator/features/home/widgets/spotify_playlist_tile.dart';
 
 class SpotifyPlaylistChooserPage extends StatelessWidget {
   const SpotifyPlaylistChooserPage({super.key});

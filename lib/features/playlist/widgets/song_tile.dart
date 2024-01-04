@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
-import 'package:playlist_annotator/core/models/song.dart';
+import 'package:playlist_annotator/features/core/models/song.dart';
 
 class SongTile extends StatefulWidget {
   final Song song;

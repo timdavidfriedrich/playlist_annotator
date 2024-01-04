@@ -1,5 +1,5 @@
-import 'package:playlist_annotator/core/models/song.dart';
-import 'package:playlist_annotator/core/models/user.dart';
+import 'package:playlist_annotator/features/core/models/song.dart';
+import 'package:playlist_annotator/features/core/models/user.dart';
 import 'package:pocketbase/pocketbase.dart';
 
 class Playlist {

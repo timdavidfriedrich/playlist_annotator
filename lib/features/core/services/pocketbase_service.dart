@@ -1,9 +1,9 @@
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:get/get.dart';
 import 'package:log/log.dart';
-import 'package:playlist_annotator/core/models/user.dart';
-import 'package:playlist_annotator/core/services/local_storage_services.dart';
-import 'package:playlist_annotator/core/services/user_service.dart';
+import 'package:playlist_annotator/features/core/models/user.dart';
+import 'package:playlist_annotator/features/core/services/local_storage_services.dart';
+import 'package:playlist_annotator/features/core/services/user_service.dart';
 import 'package:pocketbase/pocketbase.dart';
 
 class PocketbaseService extends GetxService {
