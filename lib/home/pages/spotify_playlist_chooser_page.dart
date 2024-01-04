@@ -28,7 +28,7 @@ class SpotifyPlaylistChooserPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Add playlist"),
+        title: Text("add_playlist_label".tr),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -36,8 +36,8 @@ class SpotifyPlaylistChooserPage extends StatelessWidget {
           children: [
             TextField(
               controller: uriController,
-              decoration: const InputDecoration(
-                labelText: "Playlist URI",
+              decoration: InputDecoration(
+                labelText: "playlist_uri_label".tr,
               ),
             ),
             const SizedBox(height: 32),

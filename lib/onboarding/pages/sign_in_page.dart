@@ -16,7 +16,7 @@ class SignInPage extends StatelessWidget {
       body: Center(
         child: FilledButton(
           onPressed: signInWithSpotify,
-          child: const Text("Sign In With Spotify"),
+          child: Text("sign_in_spotify_label".tr),
         ),
       ),
     );

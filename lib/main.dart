@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:get/instance_manager.dart';
+import 'package:playlist_annotator/core/localization/messages.dart';
 import 'package:playlist_annotator/core/models/user.dart';
 import 'package:playlist_annotator/home/pages/home_page.dart';
 import 'package:playlist_annotator/onboarding/pages/sign_in_page.dart';
@@ -18,7 +20,10 @@ class PlaylistAnnotator extends StatelessWidget {
     final UserController user = Get.put(UserController());
 
     return GetMaterialApp(
-      title: "Playlist Annotator",
+      title: "app_title".tr,
+      translations: Messages(),
+      locale: Get.deviceLocale,
+      fallbackLocale: const Locale('en', 'US'),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true),
       darkTheme: ThemeData.dark(useMaterial3: true),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:log/log.dart';
 import 'package:playlist_annotator/core/models/playlist.dart';
 import 'package:playlist_annotator/playlist/widgets/song_tile.dart';
@@ -61,17 +62,18 @@ class _PlaylistPageState extends State<PlaylistPage> {
             Text(widget.playlist.description),
             const SizedBox(height: 16),
             Row(children: [
-              Text(widget.playlist.owners.firstOrNull?.name ?? "Unknown"),
-              Text(" • ${widget.playlist.songs.length} songs"),
+              Text(widget.playlist.owners.firstOrNull?.name ?? "unknown_author_label".tr),
+              const Text(" • "),
+              Text("song_count_label".trParams({"count": "${widget.playlist.songs.length}"})),
               const Spacer(),
               TextButton(
                 onPressed: collapseAll,
-                child: const Row(
+                child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text("Collapse all"),
-                    SizedBox(width: 4),
-                    Icon(Icons.expand_less_rounded),
+                    Text("collapse_all_label".tr),
+                    const SizedBox(width: 4),
+                    const Icon(Icons.expand_less_rounded),
                   ],
                 ),
               )

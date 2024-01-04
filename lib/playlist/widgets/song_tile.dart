@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:playlist_annotator/core/models/song.dart';
 
 class SongTile extends StatefulWidget {
@@ -33,7 +34,8 @@ class _SongTileState extends State<SongTile> {
               child: TextField(
                 decoration: InputDecoration(
                   fillColor: Theme.of(context).colorScheme.surfaceTint,
-                  labelText: 'Add a comment',
+                  // TODO: Replace "0 + 1" with the number of annotations + 1
+                  labelText: "add_first_comment_label".trPlural("add_comment_label".tr, 0 + 1),
                 ),
               ),
             ),

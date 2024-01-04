@@ -36,14 +36,14 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Playlist Annotator"),
+        title: Text("app_title".tr),
       ),
       body: ListView.builder(
         itemCount: playlists.length + 1,
         itemBuilder: (context, index) {
           if (index == playlists.length) {
             return ListTile(
-              title: const Text("Add Playlist"),
+              title: Text("add_playlist_label".tr),
               leading: const Icon(Icons.add),
               onTap: addPlaylist,
             );
