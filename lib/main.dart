@@ -4,12 +4,12 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:get/instance_manager.dart';
 import 'package:playlist_annotator/core/localization/messages.dart';
-import 'package:playlist_annotator/core/models/user.dart';
 import 'package:playlist_annotator/core/services/local_storage_services.dart';
-import 'package:playlist_annotator/core/services/pocketbase/auth_service.dart';
-import 'package:playlist_annotator/core/services/pocketbase/database_service.dart';
-import 'package:playlist_annotator/core/services/pocketbase/pocketbase_service.dart';
-import 'package:playlist_annotator/core/services/spotify.dart';
+import 'package:playlist_annotator/core/services/auth_service.dart';
+import 'package:playlist_annotator/core/services/database_service.dart';
+import 'package:playlist_annotator/core/services/pocketbase_service.dart';
+import 'package:playlist_annotator/core/services/spotify_service.dart';
+import 'package:playlist_annotator/core/services/user_service.dart';
 import 'package:playlist_annotator/home/pages/home_page.dart';
 import 'package:playlist_annotator/onboarding/pages/sign_in_page.dart';
 
@@ -32,7 +32,7 @@ class PlaylistAnnotator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final UserService user = Get.find();
+    UserService user = Get.find();
 
     return GetMaterialApp(
       title: "app_title".tr,

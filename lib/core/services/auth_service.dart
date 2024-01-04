@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
-import 'package:playlist_annotator/core/services/pocketbase/pocketbase_service.dart';
+import 'package:playlist_annotator/core/services/pocketbase_service.dart';
 import 'package:playlist_annotator/core/models/user.dart';
+import 'package:playlist_annotator/core/services/user_service.dart';
 import 'package:pocketbase/pocketbase.dart';
 
 class AuthService extends GetxService {
