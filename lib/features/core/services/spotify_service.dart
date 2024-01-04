@@ -4,14 +4,16 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:log/log.dart';
+import 'package:playlist_annotator/constants/links.dart';
+import 'package:playlist_annotator/constants/secrets.dart';
 import 'package:playlist_annotator/features/core/models/playlist.dart';
 import 'package:playlist_annotator/features/core/models/spotify_playlist_item.dart';
 import 'package:playlist_annotator/features/core/services/local_storage_services.dart';
 import 'package:playlist_annotator/features/core/services/user_service.dart';
 
 class SpotifyService extends GetxService {
-  final clientId = '81ae522634cb431daed4230728ed0a76';
-  final clientSecret = '25524e4e3a1b4e2bba98fe17bfea97da';
+  final clientId = Secrets.spotifyClientId;
+  final clientSecret = Secrets.spotifyClientSecret;
 
   late String? refreshToken;
 
@@ -20,8 +22,8 @@ class SpotifyService extends GetxService {
     return this;
   }
 
-  final String baseUrl = "https://api.spotify.com/v1";
-  final String tokenUrl = "https://accounts.spotify.com/api/token";
+  final String baseUrl = Links.spotifyBaseUrl;
+  final String tokenUrl = Links.spotifyTokenUrl;
 
   Future<String?> getAccessToken() async {
     // if (refreshToken != null) {

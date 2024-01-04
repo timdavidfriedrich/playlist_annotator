@@ -1,6 +1,7 @@
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:get/get.dart';
 import 'package:log/log.dart';
+import 'package:playlist_annotator/constants/links.dart';
 import 'package:playlist_annotator/features/core/models/user.dart';
 import 'package:playlist_annotator/features/core/services/local_storage_services.dart';
 import 'package:playlist_annotator/features/core/services/user_service.dart';
@@ -16,7 +17,7 @@ class PocketbaseService extends GetxService {
     if (store.isValid) {
       _updateCurrentUser(store);
     }
-    pocketbase = PocketBase('http://192.168.1.221:8090', authStore: store);
+    pocketbase = PocketBase(Links.pocketbaseUrl, authStore: store);
     return this;
   }
 
