@@ -22,9 +22,11 @@ Future<void> initServices() async {
   await Get.putAsync(() => AuthService().init());
   await Get.putAsync(() => DataService().init());
   await Get.putAsync(() => LocalStorageService().init());
-  await Get.putAsync(() => PocketbaseService().init());
   await Get.putAsync(() => SpotifyService().init());
   await Get.putAsync(() => UserService().init());
+
+  /// Depends on LocalStorageService and UserService
+  await Get.putAsync(() => PocketbaseService().init());
 }
 
 class PlaylistAnnotator extends StatelessWidget {

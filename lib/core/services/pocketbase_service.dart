@@ -1,15 +1,36 @@
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:get/get.dart';
 import 'package:log/log.dart';
+import 'package:playlist_annotator/core/models/user.dart';
+import 'package:playlist_annotator/core/services/local_storage_services.dart';
 import 'package:playlist_annotator/core/services/user_service.dart';
 import 'package:pocketbase/pocketbase.dart';
 
 class PocketbaseService extends GetxService {
+  late String? initialAuthStoreData;
+  late AsyncAuthStore store;
+  late PocketBase pocketbase;
+
   Future<PocketbaseService> init() async {
+    store = await _loadAsyncAuthStore();
+    if (store.isValid) {
+      _updateCurrentUser(store);
+    }
+    pocketbase = PocketBase('http://192.168.1.221:8090', authStore: store);
     return this;
   }
 
-  PocketBase pocketbase = PocketBase('http://192.168.1.221:8090');
+  Future<AsyncAuthStore> _loadAsyncAuthStore() async {
+    initialAuthStoreData = await Get.find<LocalStorageService>().loadAuthStore();
+    return AsyncAuthStore(
+      save: (String data) async => await Get.find<LocalStorageService>().saveAuthStore(data),
+      initial: initialAuthStoreData,
+    );
+  }
+
+  void _updateCurrentUser(AuthStore store) {
+    Get.find<UserService>().updateCurrentUser(User.fromPocketbaseRecord(store.model));
+  }
 
   Future<RecordAuth?> signInWithSpotify() async {
     final authData = await pocketbase.collection('users').authWithOAuth2('spotify', (uri) async {
