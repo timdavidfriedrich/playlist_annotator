@@ -8,7 +8,7 @@ import 'package:playlist_annotator/core/models/user.dart';
 import 'package:playlist_annotator/core/services/local_storage_services.dart';
 import 'package:playlist_annotator/core/services/pocketbase/auth_service.dart';
 import 'package:playlist_annotator/core/services/pocketbase/database_service.dart';
-import 'package:playlist_annotator/core/services/pocketbase/pocketbase.dart';
+import 'package:playlist_annotator/core/services/pocketbase/pocketbase_service.dart';
 import 'package:playlist_annotator/core/services/spotify.dart';
 import 'package:playlist_annotator/home/pages/home_page.dart';
 import 'package:playlist_annotator/onboarding/pages/sign_in_page.dart';

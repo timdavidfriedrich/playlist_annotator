@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:playlist_annotator/core/services/pocketbase/pocketbase.dart';
+import 'package:playlist_annotator/core/services/pocketbase/pocketbase_service.dart';
 import 'package:playlist_annotator/core/models/user.dart';
 import 'package:pocketbase/pocketbase.dart';
 
