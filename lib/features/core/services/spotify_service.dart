@@ -89,9 +89,7 @@ class SpotifyService extends GetxService {
 
   Future<List<SpotifyPlaylistItem>> getUserSpotifyPlaylists(String token) async {
     final userId = Get.find<UserService>().currentUser.value?.username;
-    Log.debug("userId: $userId");
     final url = Uri.parse('$baseUrl/users/$userId/playlists');
-    Log.debug("url: $url");
     final headers = {
       'Authorization': 'Bearer $token',
     };
