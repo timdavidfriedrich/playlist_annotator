@@ -10,14 +10,14 @@ class AuthService extends GetxService {
   }
 
   Future<void> signIn() async {
-    PocketbaseService pocketbase = Get.find();
-    final authData = await pocketbase.signInWithSpotify();
+    PocketbaseService pocketbaseService = Get.find();
+    final authData = await pocketbaseService.signInWithSpotify();
     _updateCurrentUser(authData);
   }
 
   void _updateCurrentUser(RecordAuth? authData) {
     if (authData?.record == null) return;
-    final UserService user = Get.find();
-    user.updateCurrentUser(User.fromPocketbaseRecord(authData!.record!));
+    final UserService userService = Get.find();
+    userService.updateCurrentUser(User.fromPocketbaseRecord(authData!.record!));
   }
 }

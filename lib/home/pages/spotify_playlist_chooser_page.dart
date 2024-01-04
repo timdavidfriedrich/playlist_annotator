@@ -12,10 +12,10 @@ class SpotifyPlaylistChooserPage extends StatelessWidget {
     TextEditingController uriController = TextEditingController();
 
     Future<List<SpotifyPlaylistItem>> getPlaylists() async {
-      SpotifyService spotify = Get.find();
-      final token = await spotify.getAccessToken();
+      SpotifyService spotifyService = Get.find();
+      final token = await spotifyService.getAccessToken();
       if (token == null) return [];
-      return await spotify.getUserSpotifyPlaylists(token);
+      return await spotifyService.getUserSpotifyPlaylists(token);
     }
 
     void returnPlaylist(SpotifyPlaylistItem playlist) {

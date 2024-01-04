@@ -32,7 +32,7 @@ class PlaylistAnnotator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    UserService user = Get.find();
+    UserService userService = Get.find();
 
     return GetMaterialApp(
       title: "app_title".tr,
@@ -43,7 +43,7 @@ class PlaylistAnnotator extends StatelessWidget {
       theme: ThemeData(useMaterial3: true),
       darkTheme: ThemeData.dark(useMaterial3: true),
       home: Obx(() {
-        return user.current.value == null ? const SignInPage() : const HomePage();
+        return userService.current.value == null ? const SignInPage() : const HomePage();
       }),
     );
   }
