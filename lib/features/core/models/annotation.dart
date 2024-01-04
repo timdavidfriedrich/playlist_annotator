@@ -1,29 +1,28 @@
-import 'package:playlist_annotator/features/core/models/playlist.dart';
-import 'package:playlist_annotator/features/core/models/song.dart';
-import 'package:playlist_annotator/features/core/models/user.dart';
-
 class Annotation {
   final String id;
-  final Song song;
-  final User user;
-  final int rating;
-  final String comment;
-  final Playlist? playlist;
+  final String songSpotifyId;
+  final String userId;
+  final String userName;
+  final int? rating;
+  final String? comment;
+  final String? playlistId;
 
   Annotation({
     required this.id,
-    required this.song,
-    required this.user,
-    required this.rating,
-    required this.comment,
-    this.playlist,
+    required this.songSpotifyId,
+    required this.userId,
+    required this.userName,
+    this.rating,
+    this.comment,
+    required this.playlistId,
   });
 
   Annotation.global({
     required this.id,
-    required this.song,
-    required this.user,
-    required this.rating,
-    required this.comment,
-  }) : playlist = null;
+    required this.songSpotifyId,
+    required this.userId,
+    required this.userName,
+    this.rating,
+    this.comment,
+  }) : playlistId = null;
 }
