@@ -7,7 +7,7 @@ import 'package:playlist_annotator/config/themes/theme_config.dart';
 import 'package:playlist_annotator/features/core/localization/messages.dart';
 import 'package:playlist_annotator/features/core/services/local_storage_services.dart';
 import 'package:playlist_annotator/features/core/services/auth_service.dart';
-import 'package:playlist_annotator/features/core/services/database_service.dart';
+import 'package:playlist_annotator/features/core/services/data_service.dart';
 import 'package:playlist_annotator/features/core/services/pocketbase_service.dart';
 import 'package:playlist_annotator/features/core/services/spotify_service.dart';
 import 'package:playlist_annotator/features/core/services/user_service.dart';
