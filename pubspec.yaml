@@ -24,6 +24,7 @@ dependencies:
   flutter_custom_tabs: ^1.2.1
   pocketbase: ^0.17.0
   secure_shared_preferences: ^0.0.4
+  google_fonts: ^6.1.0
   
 
 dev_dependencies:

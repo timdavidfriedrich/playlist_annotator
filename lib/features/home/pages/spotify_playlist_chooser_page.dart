@@ -34,13 +34,14 @@ class SpotifyPlaylistChooserPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
+            const SizedBox(height: 16),
             TextField(
               controller: uriController,
               decoration: InputDecoration(
                 labelText: "playlist_uri_label".tr,
               ),
             ),
-            const SizedBox(height: 32),
+            const SizedBox(height: 16),
             Expanded(
               child: FutureBuilder(
                 future: getPlaylists(),

@@ -68,17 +68,10 @@ class _PlaylistPageState extends State<PlaylistPage> {
               const Spacer(),
               TextButton(
                 onPressed: collapseAll,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text("collapse_all_label".tr),
-                    const SizedBox(width: 4),
-                    const Icon(Icons.expand_less_rounded),
-                  ],
-                ),
+                child: Text("collapse_all_label".tr),
               )
             ]),
-            const SizedBox(height: 32),
+            const SizedBox(height: 16),
             for (int index = 0; index < widget.playlist.songs.length; index++)
               SongTile(
                 song: widget.playlist.songs.elementAt(index),

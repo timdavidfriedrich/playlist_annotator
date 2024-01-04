@@ -33,7 +33,6 @@ class _SongTileState extends State<SongTile> {
             Expanded(
               child: TextField(
                 decoration: InputDecoration(
-                  fillColor: Theme.of(context).colorScheme.surfaceTint,
                   // TODO: Replace "0 + 1" with the number of annotations + 1
                   labelText: "add_first_comment_label".trPlural("add_comment_label".tr, 0 + 1),
                 ),
