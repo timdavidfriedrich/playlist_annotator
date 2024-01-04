@@ -1,11 +1,11 @@
 {
-    "name": "playlist_annotator",
-    "short_name": "playlist_annotator",
+    "name": "Playlist Annotator",
+    "short_name": "Playlist Annotator",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Annotate songs from your Spotify playlists.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

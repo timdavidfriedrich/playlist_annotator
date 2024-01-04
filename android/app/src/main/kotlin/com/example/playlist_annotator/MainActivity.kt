@@ -1,4 +1,4 @@
-package com.example.playlist_annotator
+package de.timdavidfriedrich.playlist_annotator
 
 import io.flutter.embedding.android.FlutterActivity
 
