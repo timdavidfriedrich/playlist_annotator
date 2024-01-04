@@ -69,11 +69,11 @@ class PocketbaseService extends GetxService {
     }
   }
 
-  Future<Function()> subscribe() async {
+  Future<Function()> subscribePlaylistPreviews() async {
     final UserService userService = Get.find();
     String? userId = userService.currentUser.value?.id;
     // TODO: Add filter
-    final subscription = await pocketbase.collection('playlists').subscribe("*", filter: "annotators ~ \"$userId\"", (event) {
+    final subscription = await pocketbase.collection('playlistPreviews').subscribe("*", filter: "annotators ~ \"$userId\"", (event) {
       Log.debug("event: ${event.record}");
     });
     return subscription;
@@ -85,11 +85,6 @@ class PocketbaseService extends GetxService {
     // TODO: Replace getFullList(..) with getList(..)
     final playlistPreviews = await pocketbase.collection('playlistPreviews').getFullList(filter: "annotators ~\"$userId\"");
     return playlistPreviews.map((record) => PlaylistPreview.fromPocketbaseRecord(record)).toList();
-  }
-
-  Future<RecordModel?> getPlaylistById(String id) async {
-    final playlist = await pocketbase.collection('playlists').getOne(id);
-    return playlist;
   }
 
   Future<RecordModel> addPlaylistPreview(PlaylistPreview playlistPreview) {
