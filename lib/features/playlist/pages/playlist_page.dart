@@ -51,7 +51,6 @@ class _PlaylistPageState extends State<PlaylistPage> {
               padding: const EdgeInsets.symmetric(horizontal: Measurements.normalPadding),
               child: ListView(
                 children: [
-                  Text("${localAnnotations.length} annotations"),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width / 4),
                     child: AspectRatio(
