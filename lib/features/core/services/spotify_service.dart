@@ -111,8 +111,8 @@ class SpotifyService extends GetxService {
     return playlistPreviews;
   }
 
-  Future<Playlist?> getPlaylistById({required String id, required String token}) async {
-    final url = Uri.parse('$baseUrl/playlists/$id');
+  Future<Playlist?> getPlaylistByPlaylistPreview({required PlaylistPreview playlistPreview, required String token}) async {
+    final url = Uri.parse('$baseUrl/playlists/${playlistPreview.spotifyId}');
     final headers = {
       'Authorization': 'Bearer $token',
     };
@@ -120,7 +120,7 @@ class SpotifyService extends GetxService {
     final response = await http.get(url, headers: headers);
     if (response.statusCode == 200) {
       var body = jsonDecode(response.body);
-      return Playlist.fromSpotify(body);
+      return Playlist.fromSpotifyAndId(id: playlistPreview.id, data: body);
     } else {
       Log.error("Failed to get playlist by ID with error ${response.statusCode}: ${response.reasonPhrase}. Returning null.");
       return null;

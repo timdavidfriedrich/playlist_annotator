@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
     SpotifyService spotifyService = Get.find<SpotifyService>();
     final token = await spotifyService.getAccessToken();
     if (token == null) return null;
-    return await spotifyService.getPlaylistById(id: playlistPreview.spotifyId, token: token);
+    return await spotifyService.getPlaylistByPlaylistPreview(playlistPreview: playlistPreview, token: token);
   }
 
   @override

@@ -33,9 +33,8 @@ class Playlist {
         ownerSpotifyNames = record.data['ownerSpotifyNames'],
         songs = []; // TODO: Implement songs
 
-  Playlist.fromSpotify(Map<String, dynamic> data)
-      : id = "PLAYLIST_NOT_UPLOADED_YET", // ? What about pocketbase id ?
-        spotifyId = data['id'],
+  Playlist.fromSpotifyAndId({required this.id, required Map<String, dynamic> data})
+      : spotifyId = data['id'],
         name = data['name'],
         description = data['description'],
         imageUrl = data['images'][0]['url'],

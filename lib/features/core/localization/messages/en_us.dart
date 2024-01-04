@@ -1,5 +1,6 @@
 const Map<String, String> enUS = {
   "app_title": "Playlist Annotator",
+  "error_label": "Error",
   "add_playlist_label": "Add playlist",
   "playlist_uri_label": "Playlist URI",
   "sign_in_spotify_label": "Sign in with Spotify",

@@ -2,6 +2,7 @@ import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:get/get.dart';
 import 'package:log/log.dart';
 import 'package:playlist_annotator/constants/links.dart';
+import 'package:playlist_annotator/features/core/models/annotation.dart';
 import 'package:playlist_annotator/features/core/models/playlist_preview.dart';
 import 'package:playlist_annotator/features/core/models/user.dart';
 import 'package:playlist_annotator/features/core/services/local_storage_services.dart';
@@ -89,5 +90,19 @@ class PocketbaseService extends GetxService {
 
   Future<RecordModel> addPlaylistPreview(PlaylistPreview playlistPreview) {
     return pocketbase.collection('playlistPreviews').create(body: playlistPreview.toPocketbaseRecord());
+  }
+
+  Future<List<Annotation>> getLocalAnnotationsForPlaylistId(String playlistId) async {
+    final List<RecordModel> records = await pocketbase.collection('localAnnotations').getFullList(filter: "playlist = \"$playlistId\"");
+    return records.map((record) => Annotation.fromPocketbaseRecord(record)).toList();
+  }
+
+  Future<RecordModel> saveLocalAnnotation(Annotation annotation) async {
+    try {
+      return await pocketbase.collection('localAnnotations').update(annotation.id, body: annotation.toPocketbaseRecord());
+    } catch (e) {
+      Log.error(e);
+      return await pocketbase.collection('localAnnotations').create(body: annotation.toPocketbaseRecord());
+    }
   }
 }
