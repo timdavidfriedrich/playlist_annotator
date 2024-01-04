@@ -6,9 +6,9 @@ class UserService extends GetxService {
     return this;
   }
 
-  Rxn<User?> current = Rxn<User?>();
+  Rxn<User?> currentUser = Rxn<User?>();
 
   updateCurrentUser(User? user) {
-    current.value = user;
+    currentUser.value = user;
   }
 }

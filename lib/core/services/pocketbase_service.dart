@@ -48,7 +48,7 @@ class PocketbaseService extends GetxService {
 
   Future<Function()> subscribe() async {
     final UserService userService = Get.find();
-    String? userId = userService.current.value?.id;
+    String? userId = userService.currentUser.value?.id;
     // TODO: Add filter
     final subscription = await pocketbase.collection('playlists').subscribe("*", filter: "owners~\"$userId\"", (event) {
       Log.debug("event: ${event.record}");
@@ -58,7 +58,7 @@ class PocketbaseService extends GetxService {
 
   Future<List<RecordModel>> getPlaylists() async {
     final UserService userService = Get.find();
-    String? userId = userService.current.value?.id;
+    String? userId = userService.currentUser.value?.id;
     // TODO: Replace getFullList(..) with getList(..)
     // TODO: Add filter
     final playlists = await pocketbase.collection('playlists').getFullList(filter: "owners~\"$userId\"");

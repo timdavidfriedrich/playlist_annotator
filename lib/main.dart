@@ -43,7 +43,7 @@ class PlaylistAnnotator extends StatelessWidget {
       theme: ThemeData(useMaterial3: true),
       darkTheme: ThemeData.dark(useMaterial3: true),
       home: Obx(() {
-        return userService.current.value == null ? const SignInPage() : const HomePage();
+        return userService.currentUser.value == null ? const SignInPage() : const HomePage();
       }),
     );
   }
