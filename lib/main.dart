@@ -5,11 +5,17 @@ import 'package:get/get_utils/get_utils.dart';
 import 'package:get/instance_manager.dart';
 import 'package:playlist_annotator/core/localization/messages.dart';
 import 'package:playlist_annotator/core/models/user.dart';
+import 'package:playlist_annotator/core/services/local_storage_services.dart';
 import 'package:playlist_annotator/home/pages/home_page.dart';
 import 'package:playlist_annotator/onboarding/pages/sign_in_page.dart';
 
-void main() {
+Future<void> main() async {
+  await initServices();
   runApp(const PlaylistAnnotator());
+}
+
+Future<void> initServices() async {
+  await Get.putAsync(() => LocalStorageService().init());
 }
 
 class PlaylistAnnotator extends StatelessWidget {
