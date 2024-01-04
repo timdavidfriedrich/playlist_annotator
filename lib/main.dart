@@ -6,6 +6,10 @@ import 'package:get/instance_manager.dart';
 import 'package:playlist_annotator/core/localization/messages.dart';
 import 'package:playlist_annotator/core/models/user.dart';
 import 'package:playlist_annotator/core/services/local_storage_services.dart';
+import 'package:playlist_annotator/core/services/pocketbase/auth_service.dart';
+import 'package:playlist_annotator/core/services/pocketbase/database_service.dart';
+import 'package:playlist_annotator/core/services/pocketbase/pocketbase.dart';
+import 'package:playlist_annotator/core/services/spotify.dart';
 import 'package:playlist_annotator/home/pages/home_page.dart';
 import 'package:playlist_annotator/onboarding/pages/sign_in_page.dart';
 
@@ -15,7 +19,12 @@ Future<void> main() async {
 }
 
 Future<void> initServices() async {
+  await Get.putAsync(() => AuthService().init());
+  await Get.putAsync(() => DataService().init());
   await Get.putAsync(() => LocalStorageService().init());
+  await Get.putAsync(() => PocketbaseService().init());
+  await Get.putAsync(() => SpotifyService().init());
+  await Get.putAsync(() => UserService().init());
 }
 
 class PlaylistAnnotator extends StatelessWidget {
@@ -23,7 +32,7 @@ class PlaylistAnnotator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final UserController user = Get.put(UserController());
+    final UserService user = Get.find();
 
     return GetMaterialApp(
       title: "app_title".tr,

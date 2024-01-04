@@ -4,7 +4,11 @@ import 'package:log/log.dart';
 import 'package:playlist_annotator/core/models/user.dart';
 import 'package:pocketbase/pocketbase.dart';
 
-class Pocketbase extends GetxController {
+class PocketbaseService extends GetxService {
+  Future<PocketbaseService> init() async {
+    return this;
+  }
+
   PocketBase pocketbase = PocketBase('http://192.168.1.221:8090');
 
   Future<RecordAuth?> signInWithSpotify() async {
@@ -43,7 +47,7 @@ class Pocketbase extends GetxController {
   }
 
   Future<Function()> subscribe() async {
-    final UserController user = Get.put(UserController());
+    final UserService user = Get.find();
     String? userId = user.current.value?.id;
     // TODO: Add filter
     final subscription = await pocketbase.collection('playlists').subscribe("*", filter: "owners~\"$userId\"", (event) {
@@ -53,7 +57,7 @@ class Pocketbase extends GetxController {
   }
 
   Future<List<RecordModel>> getPlaylists() async {
-    final UserController user = Get.put(UserController());
+    final UserService user = Get.find();
     String? userId = user.current.value?.id;
     // TODO: Replace getFullList(..) with getList(..)
     // TODO: Add filter

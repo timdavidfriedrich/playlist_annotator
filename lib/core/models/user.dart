@@ -1,7 +1,11 @@
 import 'package:get/state_manager.dart';
 import 'package:pocketbase/pocketbase.dart';
 
-class UserController extends GetxController {
+class UserService extends GetxService {
+  Future<UserService> init() async {
+    return this;
+  }
+
   Rxn<User?> current = Rxn<User?>();
 
   updateCurrentUser(User? user) {

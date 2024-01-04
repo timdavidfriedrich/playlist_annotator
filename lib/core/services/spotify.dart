@@ -8,9 +8,13 @@ import 'package:playlist_annotator/core/models/playlist.dart';
 import 'package:playlist_annotator/core/models/spotify_playlist_item.dart';
 import 'package:playlist_annotator/core/models/user.dart';
 
-class Spotify extends GetxController {
+class SpotifyService extends GetxService {
   final clientId = '81ae522634cb431daed4230728ed0a76';
   final clientSecret = '25524e4e3a1b4e2bba98fe17bfea97da';
+
+  Future<SpotifyService> init() async {
+    return this;
+  }
 
   final String baseUrl = "https://api.spotify.com/v1";
 
@@ -34,7 +38,7 @@ class Spotify extends GetxController {
   }
 
   Future<List<SpotifyPlaylistItem>> getUserSpotifyPlaylists(String token) async {
-    final userId = Get.put(UserController()).current.value?.username;
+    final userId = Get.find<UserService>().current.value?.username;
     Log.debug("userId: $userId");
     final url = Uri.parse('$baseUrl/users/$userId/playlists');
     Log.debug("url: $url");

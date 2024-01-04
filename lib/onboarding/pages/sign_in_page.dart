@@ -8,7 +8,7 @@ class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future<void> signInWithSpotify() async {
-      AuthService authService = Get.put(AuthService());
+      AuthService authService = Get.find();
       await authService.signIn();
     }
 

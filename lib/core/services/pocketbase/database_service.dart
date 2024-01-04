@@ -1,7 +1,10 @@
 import 'package:get/state_manager.dart';
 import 'package:playlist_annotator/core/models/playlist.dart';
 
-class DatabaseService extends GetxController {
+class DataService extends GetxService {
+  Future<DataService> init() async {
+    return this;
+  }
 
   RxList<Playlist> playlists = RxList<Playlist>([]);
 }

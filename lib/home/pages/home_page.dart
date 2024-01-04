@@ -20,8 +20,8 @@ class _HomePageState extends State<HomePage> {
     // final uri = await showDialog(context: context, builder: (context) => const AddPlaylistDialog());
     SpotifyPlaylistItem? spotifyPlaylistItem = await Get.to(() => const SpotifyPlaylistChooserPage());
     if (spotifyPlaylistItem == null) return;
-    final token = await Get.put(Spotify()).getAccessToken();
-    Playlist? playlist = await Get.put(Spotify()).getPlaylistById(id: spotifyPlaylistItem.id, token: token ?? "");
+    final token = await Get.find<SpotifyService>().getAccessToken();
+    Playlist? playlist = await Get.find<SpotifyService>().getPlaylistById(id: spotifyPlaylistItem.id, token: token ?? "");
     if (playlist == null) return;
     setState(() {
       playlists.add(playlist);
