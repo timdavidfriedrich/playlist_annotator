@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:playlist_annotator/core/api/pocketbase/auth_service.dart';
+import 'package:playlist_annotator/core/services/pocketbase/auth_service.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});

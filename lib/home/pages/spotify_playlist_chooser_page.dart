@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:playlist_annotator/core/api/spotify.dart';
+import 'package:playlist_annotator/core/services/spotify.dart';
 import 'package:playlist_annotator/core/models/spotify_playlist_item.dart';
 import 'package:playlist_annotator/home/widgets/spotify_playlist_tile.dart';
 
