@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:playlist_annotator/constants/measurements.dart';
 import 'package:playlist_annotator/features/core/models/spotify_playlist_item.dart';
 
 class SpotifyPlaylistTile extends StatelessWidget {
@@ -10,11 +11,11 @@ class SpotifyPlaylistTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Measurements.defaultBorderRadius)),
         title: Text(spotifyPlaylistItem.name),
         subtitle: Text(spotifyPlaylistItem.ownerId),
         leading: ClipRRect(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(Measurements.defaultBorderRadius),
           child: Image.network(spotifyPlaylistItem.imageUrl, height: 50, width: 50),
         ),
         onTap: onTap,

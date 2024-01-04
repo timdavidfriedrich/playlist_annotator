@@ -73,7 +73,9 @@ class ThemeConfig {
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: ButtonStyle(
-          padding: MaterialStateProperty.all(const EdgeInsets.fromLTRB(16, 0, 16, 0)),
+          padding: MaterialStateProperty.all(
+            const EdgeInsets.fromLTRB(Measurements.normalPadding, 0, Measurements.normalPadding, 0),
+          ),
           shape: MaterialStateProperty.all(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(Measurements.defaultBorderRadius),
@@ -93,7 +95,14 @@ class ThemeConfig {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
-          padding: MaterialStateProperty.all(const EdgeInsets.fromLTRB(32, 16, 32, 16)),
+          padding: MaterialStateProperty.all(
+            const EdgeInsets.fromLTRB(
+              Measurements.mediumPadding,
+              Measurements.normalPadding,
+              Measurements.mediumPadding,
+              Measurements.normalPadding,
+            ),
+          ),
           shape: MaterialStateProperty.all(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(Measurements.defaultBorderRadius),

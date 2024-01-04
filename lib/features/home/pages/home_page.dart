@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:playlist_annotator/constants/measurements.dart';
 import 'package:playlist_annotator/features/core/services/spotify_service.dart';
 import 'package:playlist_annotator/features/core/models/playlist.dart';
 import 'package:playlist_annotator/features/core/models/spotify_playlist_item.dart';
@@ -40,7 +41,7 @@ class _HomePageState extends State<HomePage> {
         title: Text("app_title".tr),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: Measurements.normalPadding),
         child: ListView.builder(
           itemCount: playlists.length + 1,
           itemBuilder: (context, index) {

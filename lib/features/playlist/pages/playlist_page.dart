@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:log/log.dart';
+import 'package:playlist_annotator/constants/measurements.dart';
 import 'package:playlist_annotator/features/core/models/playlist.dart';
 import 'package:playlist_annotator/features/playlist/widgets/song_tile.dart';
 
@@ -36,7 +37,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: Measurements.normalPadding),
         child: ListView(
           children: [
             Padding(
@@ -44,7 +45,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
               child: AspectRatio(
                 aspectRatio: 1,
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(Measurements.normalPadding),
                   child: Image.network(
                     widget.playlist.imageUrl,
                     fit: BoxFit.cover,
@@ -53,14 +54,14 @@ class _PlaylistPageState extends State<PlaylistPage> {
                 ),
               ),
             ),
-            const SizedBox(height: 32),
+            const SizedBox(height: Measurements.mediumPadding),
             Text(
               widget.playlist.name,
               style: Theme.of(context).textTheme.headlineLarge,
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: Measurements.normalPadding),
             Text(widget.playlist.description),
-            const SizedBox(height: 16),
+            const SizedBox(height: Measurements.normalPadding),
             Row(children: [
               Text(widget.playlist.owners.firstOrNull?.name ?? "unknown_author_label".tr),
               const Text(" • "),
@@ -71,7 +72,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
                 child: Text("collapse_all_label".tr),
               )
             ]),
-            const SizedBox(height: 16),
+            const SizedBox(height: Measurements.normalPadding),
             for (int index = 0; index < widget.playlist.songs.length; index++)
               SongTile(
                 song: widget.playlist.songs.elementAt(index),

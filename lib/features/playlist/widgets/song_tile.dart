@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
+import 'package:playlist_annotator/constants/measurements.dart';
 import 'package:playlist_annotator/features/core/models/song.dart';
 
 class SongTile extends StatefulWidget {
@@ -19,14 +20,14 @@ class _SongTileState extends State<SongTile> {
       controller: widget.controller,
       title: Text(widget.song.name),
       subtitle: Text(widget.song.artist),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Measurements.defaultBorderRadius)),
       backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
       leading: ClipRRect(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(Measurements.defaultBorderRadius),
         child: Image.network(widget.song.imageUrl, height: 50, width: 50),
       ),
       initiallyExpanded: false,
-      childrenPadding: const EdgeInsets.all(16),
+      childrenPadding: const EdgeInsets.all(Measurements.normalPadding),
       children: [
         Row(
           children: [

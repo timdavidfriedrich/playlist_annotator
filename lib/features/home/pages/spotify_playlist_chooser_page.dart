@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:playlist_annotator/constants/measurements.dart';
 import 'package:playlist_annotator/features/core/services/spotify_service.dart';
 import 'package:playlist_annotator/features/core/models/spotify_playlist_item.dart';
 import 'package:playlist_annotator/features/home/widgets/spotify_playlist_tile.dart';
@@ -31,17 +32,17 @@ class SpotifyPlaylistChooserPage extends StatelessWidget {
         title: Text("add_playlist_label".tr),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: Measurements.normalPadding),
         child: Column(
           children: [
-            const SizedBox(height: 16),
+            const SizedBox(height: Measurements.normalPadding),
             TextField(
               controller: uriController,
               decoration: InputDecoration(
                 labelText: "playlist_uri_label".tr,
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: Measurements.normalPadding),
             Expanded(
               child: FutureBuilder(
                 future: getPlaylists(),

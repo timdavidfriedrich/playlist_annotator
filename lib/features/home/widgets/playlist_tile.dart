@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
+import 'package:playlist_annotator/constants/measurements.dart';
 import 'package:playlist_annotator/features/core/models/playlist.dart';
 
 class PlaylistTile extends StatelessWidget {
@@ -23,7 +24,7 @@ class PlaylistTile extends StatelessWidget {
                 onPressed: onActionTap,
               ),
         leading: ClipRRect(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(Measurements.defaultBorderRadius),
           child: Image.network(playlist.imageUrl, height: 50, width: 50),
         ),
         onTap: onTap,
