@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_utils/get_utils.dart';
 import 'package:playlist_annotator/constants/measurements.dart';
-import 'package:playlist_annotator/features/core/models/playlist.dart';
+import 'package:playlist_annotator/features/core/models/playlist_preview.dart';
 
-class PlaylistTile extends StatelessWidget {
-  final Playlist playlist;
+class PlaylistPreviewTile extends StatelessWidget {
+  final PlaylistPreview playlistPreview;
   final Function()? onTap;
   final Function()? onActionTap;
-  const PlaylistTile({super.key, required this.playlist, this.onTap, this.onActionTap});
+  const PlaylistPreviewTile({super.key, required this.playlistPreview, this.onTap, this.onActionTap});
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        title: Text(playlist.name),
-        subtitle: Text(playlist.owners.firstOrNull?.name ?? "unknown_author_label".tr),
+        title: Text(playlistPreview.name),
+        subtitle: Text(playlistPreview.ownerSpotifyNames),
         trailing: onActionTap == null
             ? null
             : IconButton(
@@ -25,7 +24,7 @@ class PlaylistTile extends StatelessWidget {
               ),
         leading: ClipRRect(
           borderRadius: BorderRadius.circular(Measurements.defaultBorderRadius),
-          child: Image.network(playlist.imageUrl, height: 50, width: 50),
+          child: Image.network(playlistPreview.imageUrl, height: 50, width: 50),
         ),
         onTap: onTap,
       ),
