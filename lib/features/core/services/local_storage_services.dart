@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:secure_shared_preferences/secure_shared_preferences.dart';
 
 class LocalStorageService extends GetxService {
-  // static LocalStorageService get to => Get.find();
   late final SecureSharedPref _secureSharedPreferences;
 
   Future<LocalStorageService> init() async {
