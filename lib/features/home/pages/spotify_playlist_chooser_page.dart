@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:playlist_annotator/constants/measurements.dart';
+import 'package:playlist_annotator/features/core/models/playlist_preview.dart';
 import 'package:playlist_annotator/features/core/services/spotify_service.dart';
-import 'package:playlist_annotator/features/core/models/spotify_playlist_item.dart';
-import 'package:playlist_annotator/features/home/widgets/spotify_playlist_tile.dart';
+import 'package:playlist_annotator/features/home/widgets/playlist_preview_tile.dart';
 
 class SpotifyPlaylistChooserPage extends StatelessWidget {
   const SpotifyPlaylistChooserPage({super.key});
@@ -12,14 +12,14 @@ class SpotifyPlaylistChooserPage extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController uriController = TextEditingController();
 
-    Future<List<SpotifyPlaylistItem>> getPlaylists() async {
+    Future<List<PlaylistPreview>> getPlaylists() async {
       SpotifyService spotifyService = Get.find();
       final token = await spotifyService.getAccessToken();
       if (token == null) return [];
-      return await spotifyService.getUserSpotifyPlaylists(token);
+      return await spotifyService.getUserSpotifyPlaylistPreviews(token);
     }
 
-    void returnPlaylist(SpotifyPlaylistItem playlist) {
+    void returnPlaylistPreview(PlaylistPreview playlist) {
       Get.back(result: playlist);
     }
 
@@ -53,15 +53,15 @@ class SpotifyPlaylistChooserPage extends StatelessWidget {
                   if (snapshot.hasError) {
                     return Center(child: Text(snapshot.error.toString()));
                   }
-                  final playlists = snapshot.data as List<SpotifyPlaylistItem>;
+                  final playlistPreviews = snapshot.data as List<PlaylistPreview>;
                   return ListView.builder(
                     shrinkWrap: true,
-                    itemCount: playlists.length,
+                    itemCount: playlistPreviews.length,
                     itemBuilder: (context, index) {
-                      final playlist = playlists.elementAt(index);
-                      return SpotifyPlaylistTile(
-                        spotifyPlaylistItem: playlists.elementAt(index),
-                        onTap: () => returnPlaylist(playlist),
+                      final playlistPreview = playlistPreviews.elementAt(index);
+                      return PlaylistPreviewTile(
+                        playlistPreview: playlistPreviews.elementAt(index),
+                        onTap: () => returnPlaylistPreview(playlistPreview),
                       );
                     },
                   );

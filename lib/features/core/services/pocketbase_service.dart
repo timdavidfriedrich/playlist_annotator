@@ -2,6 +2,7 @@ import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:get/get.dart';
 import 'package:log/log.dart';
 import 'package:playlist_annotator/constants/links.dart';
+import 'package:playlist_annotator/features/core/models/playlist_preview.dart';
 import 'package:playlist_annotator/features/core/models/user.dart';
 import 'package:playlist_annotator/features/core/services/local_storage_services.dart';
 import 'package:playlist_annotator/features/core/services/user_service.dart';
@@ -36,7 +37,7 @@ class PocketbaseService extends GetxService {
   Future<RecordAuth?> signInWithSpotify() async {
     final authData = await pocketbase.collection('users').authWithOAuth2('spotify', (uri) async {
       await launch(uri.toString());
-    }).then((response) async {
+    }).then((RecordAuth response) async {
       await _updateRecordIfNecessary(response);
       return response;
     });
@@ -44,7 +45,7 @@ class PocketbaseService extends GetxService {
     return authData;
   }
 
-  Future<void> _updateRecordIfNecessary(response) async {
+  Future<void> _updateRecordIfNecessary(RecordAuth response) async {
     if (response.record == null) return;
 
     final user = await pocketbase.collection("users").getOne(response.record!.id);
@@ -72,19 +73,18 @@ class PocketbaseService extends GetxService {
     final UserService userService = Get.find();
     String? userId = userService.currentUser.value?.id;
     // TODO: Add filter
-    final subscription = await pocketbase.collection('playlists').subscribe("*", filter: "owners~\"$userId\"", (event) {
+    final subscription = await pocketbase.collection('playlists').subscribe("*", filter: "annotators ~ \"$userId\"", (event) {
       Log.debug("event: ${event.record}");
     });
     return subscription;
   }
 
-  Future<List<RecordModel>> getPlaylists() async {
+  Future<List<PlaylistPreview>> getPlaylistPreviews() async {
     final UserService userService = Get.find();
     String? userId = userService.currentUser.value?.id;
     // TODO: Replace getFullList(..) with getList(..)
-    // TODO: Add filter
-    final playlists = await pocketbase.collection('playlists').getFullList(filter: "owners~\"$userId\"");
-    return playlists;
+    final playlistPreviews = await pocketbase.collection('playlistPreviews').getFullList(filter: "annotators ~\"$userId\"");
+    return playlistPreviews.map((record) => PlaylistPreview.fromPocketbaseRecord(record)).toList();
   }
 
   Future<RecordModel?> getPlaylistById(String id) async {
@@ -92,26 +92,7 @@ class PocketbaseService extends GetxService {
     return playlist;
   }
 
-  Future<RecordModel> addPlaylist({
-    required String spotifyUri,
-    required String name,
-    required String description,
-    required imageUrl,
-    List<String> owners = const [],
-    List<String> annotators = const [],
-    List<String> songs = const [],
-  }) async {
-    final playlist = await pocketbase.collection('playlists').create(
-      body: {
-        "spotifyUri": spotifyUri,
-        "name": name,
-        "description": description,
-        "imageUrl": imageUrl,
-        "owners": owners,
-        "annotators": annotators,
-        "songs": songs,
-      },
-    );
-    return playlist;
+  Future<RecordModel> addPlaylistPreview(PlaylistPreview playlistPreview) {
+    return pocketbase.collection('playlistPreviews').create(body: playlistPreview.toPocketbaseRecord());
   }
 }

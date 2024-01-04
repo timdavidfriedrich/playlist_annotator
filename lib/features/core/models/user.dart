@@ -2,14 +2,14 @@ import 'package:pocketbase/pocketbase.dart';
 
 class User {
   final String id;
-  final String username;
+  final String spotifyId;
   final String name;
   final String email;
   final String avatarUrl;
 
   User({
     required this.id,
-    required this.username,
+    required this.spotifyId,
     required this.name,
     required this.email,
     required this.avatarUrl,
@@ -17,7 +17,7 @@ class User {
 
   User.fromPocketbaseRecord(RecordModel record)
       : id = record.id,
-        username = record.data["username"],
+        spotifyId = record.data["username"],
         name = record.data["name"],
         email = record.data["email"],
         avatarUrl = record.data["avatarUrl"];

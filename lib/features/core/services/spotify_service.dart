@@ -7,7 +7,7 @@ import 'package:log/log.dart';
 import 'package:playlist_annotator/constants/links.dart';
 import 'package:playlist_annotator/constants/secrets.dart';
 import 'package:playlist_annotator/features/core/models/playlist.dart';
-import 'package:playlist_annotator/features/core/models/spotify_playlist_item.dart';
+import 'package:playlist_annotator/features/core/models/playlist_preview.dart';
 import 'package:playlist_annotator/features/core/services/local_storage_services.dart';
 import 'package:playlist_annotator/features/core/services/user_service.dart';
 
@@ -87,28 +87,28 @@ class SpotifyService extends GetxService {
     this.refreshToken = refreshToken;
   }
 
-  Future<List<SpotifyPlaylistItem>> getUserSpotifyPlaylists(String token) async {
-    final userId = Get.find<UserService>().currentUser.value?.username;
+  Future<List<PlaylistPreview>> getUserSpotifyPlaylistPreviews(String token) async {
+    final userId = Get.find<UserService>().currentUser.value?.spotifyId;
     final url = Uri.parse('$baseUrl/users/$userId/playlists');
     final headers = {
       'Authorization': 'Bearer $token',
     };
 
-    List<SpotifyPlaylistItem> playlists = [];
+    List<PlaylistPreview> playlistPreviews = [];
 
     final response = await http.get(url, headers: headers);
     if (response.statusCode == 200) {
       var body = jsonDecode(response.body);
       if (body['items'] != null) {
         for (var data in body['items']) {
-          playlists.add(SpotifyPlaylistItem(data));
+          playlistPreviews.add(PlaylistPreview.fromSpotify(data));
         }
       }
     } else {
       Log.error("Error ${response.statusCode}: ${response.reasonPhrase}");
     }
 
-    return playlists;
+    return playlistPreviews;
   }
 
   Future<Playlist?> getPlaylistById({required String id, required String token}) async {

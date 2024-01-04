@@ -63,7 +63,7 @@ class _PlaylistPageState extends State<PlaylistPage> {
             Text(widget.playlist.description),
             const SizedBox(height: Measurements.normalPadding),
             Row(children: [
-              Text(widget.playlist.owners.firstOrNull?.name ?? "unknown_author_label".tr),
+              Text(widget.playlist.ownerSpotifyNames),
               const Text(" • "),
               Text("song_count_label".trParams({"count": "${widget.playlist.songs.length}"})),
               const Spacer(),
