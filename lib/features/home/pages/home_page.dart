@@ -54,21 +54,21 @@ class _HomePageState extends State<HomePage> {
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: Measurements.normalPadding),
-          child: ListView.builder(
-            itemCount: playlistPreviews.length + 1,
-            itemBuilder: (context, index) {
-              if (index == playlistPreviews.length) {
-                return ListTile(
-                  title: Text("add_playlist_label".tr),
-                  leading: const Icon(Icons.add),
-                  onTap: addPlaylist,
-                );
-              }
-              return PlaylistPreviewTile(
-                playlistPreview: playlistPreviews.elementAt(index),
-                onTap: () => openPlaylist(playlistPreviews.elementAt(index)),
-              );
-            },
+          child: ListView(
+            children: [
+              ...List.generate(
+                playlistPreviews.length,
+                (index) => PlaylistPreviewTile(
+                  playlistPreview: playlistPreviews.elementAt(index),
+                  onTap: () => openPlaylist(playlistPreviews.elementAt(index)),
+                ),
+              ),
+              ListTile(
+                title: Text("add_playlist_label".tr),
+                leading: const Icon(Icons.add),
+                onTap: addPlaylist,
+              ),
+            ],
           ),
         ),
       );
