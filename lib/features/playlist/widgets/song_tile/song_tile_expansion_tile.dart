@@ -22,88 +22,93 @@ class SongTileExpansionTile extends StatelessWidget {
     SelectedSongController selectedSongController = Get.find();
 
     return Obx(
-      () => Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          ListTile(
-            title: Text(song.name),
-            onTap: () {
-              if (selectedSongController.selectedSongIds.contains(song.spotifyId)) {
-                selectedSongController.deselectSongId(song.spotifyId);
-                return;
-              }
-              Get.find<SelectedSongController>().selectSongId(song.spotifyId);
-            },
-            subtitle: Text(
-              song.artist,
-              style: TextStyle(color: Theme.of(context).hintColor),
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: selectedSongController.selectedSongIds.contains(song.spotifyId)
-                  ? const BorderRadius.vertical(top: Radius.circular(Measurements.defaultBorderRadius))
-                  : BorderRadius.circular(Measurements.defaultBorderRadius),
-            ),
-            tileColor:
-                selectedSongController.selectedSongIds.contains(song.spotifyId) ? Theme.of(context).colorScheme.surfaceVariant : null,
-            leading: ClipRRect(
-              borderRadius: BorderRadius.circular(Measurements.defaultBorderRadius),
-              child: Image.network(song.imageUrl, height: 50, width: 50),
-            ),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                if (selectedSongController.selectedSongIds.contains(song.spotifyId))
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      userHasAnnotation ? Icons.edit_rounded : Icons.add_comment_rounded,
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-                  ),
-                AnimatedRotation(
-                  duration: const Duration(milliseconds: 300),
-                  turns: selectedSongController.selectedSongIds.contains(song.spotifyId) ? 0.5 : 0,
-                  child: Icon(
-                    Icons.expand_more_rounded,
-                    color: Theme.of(context).hintColor,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          AnimatedSize(
-            duration: const Duration(milliseconds: 300),
-            curve: Curves.easeOut,
-            child: Container(
-              padding: const EdgeInsets.fromLTRB(
-                Measurements.normalPadding,
-                Measurements.minimalPadding,
-                Measurements.normalPadding,
-                Measurements.normalPadding,
+      () {
+        final bool isExpanded = selectedSongController.selectedSongIds.contains(song.spotifyId);
+
+        void toggleExpansion() {
+          if (isExpanded) {
+            selectedSongController.deselectSongId(song.spotifyId);
+          } else {
+            selectedSongController.selectSongId(song.spotifyId);
+          }
+        }
+
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ListTile(
+              title: Text(song.name),
+              onTap: toggleExpansion,
+              subtitle: Text(
+                song.artist,
+                style: TextStyle(color: Theme.of(context).hintColor),
               ),
-              height: selectedSongController.selectedSongIds.contains(song.spotifyId) ? null : 0,
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surfaceVariant,
-                borderRadius: const BorderRadius.vertical(bottom: Radius.circular(Measurements.defaultBorderRadius)),
+              shape: RoundedRectangleBorder(
+                borderRadius: isExpanded
+                    ? const BorderRadius.vertical(top: Radius.circular(Measurements.defaultBorderRadius))
+                    : BorderRadius.circular(Measurements.defaultBorderRadius),
               ),
-              child: Column(
+              tileColor: isExpanded ? Theme.of(context).colorScheme.surfaceVariant : null,
+              leading: ClipRRect(
+                borderRadius: BorderRadius.circular(Measurements.defaultBorderRadius),
+                child: Image.network(song.imageUrl, height: 50, width: 50),
+              ),
+              trailing: Row(
                 mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  for (var annotation in localAnnotations) AnnotationRow(annotation: annotation),
-                  if (localAnnotations.isEmpty)
-                    Text(
-                      "no_annotations_label".tr,
-                      style: TextStyle(color: Theme.of(context).hintColor),
+                  if (isExpanded)
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        userHasAnnotation ? Icons.edit_rounded : Icons.add_comment_rounded,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
                     ),
+                  AnimatedRotation(
+                    duration: const Duration(milliseconds: 300),
+                    turns: isExpanded ? 0.5 : 0,
+                    child: Icon(
+                      Icons.expand_more_rounded,
+                      color: Theme.of(context).hintColor,
+                    ),
+                  ),
                 ],
               ),
             ),
-          )
-        ],
-      ),
+            AnimatedSize(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeOut,
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(
+                  Measurements.normalPadding,
+                  Measurements.minimalPadding,
+                  Measurements.normalPadding,
+                  Measurements.normalPadding,
+                ),
+                height: isExpanded ? null : 0,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surfaceVariant,
+                  borderRadius: const BorderRadius.vertical(bottom: Radius.circular(Measurements.defaultBorderRadius)),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    for (var annotation in localAnnotations) AnnotationRow(annotation: annotation),
+                    if (localAnnotations.isEmpty)
+                      Text(
+                        "no_annotations_label".tr,
+                        style: TextStyle(color: Theme.of(context).hintColor),
+                      ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        );
+      },
     );
   }
 }
