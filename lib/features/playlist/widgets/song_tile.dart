@@ -3,7 +3,7 @@ import 'package:playlist_annotator/constants/measurements.dart';
 import 'package:playlist_annotator/features/core/models/annotation.dart';
 import 'package:playlist_annotator/features/core/models/song.dart';
 import 'package:playlist_annotator/features/playlist/widgets/song_tile/song_tile_annotation_indicator.dart';
-import 'package:playlist_annotator/features/playlist/widgets/song_tile/song_tile_annotation_section.dart';
+import 'package:playlist_annotator/features/playlist/widgets/song_tile/song_tile_expansion_tile.dart';
 
 class SongTile extends StatefulWidget {
   final Song song;
