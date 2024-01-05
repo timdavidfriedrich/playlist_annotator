@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:log/log.dart';
 import 'package:playlist_annotator/constants/measurements.dart';
 import 'package:playlist_annotator/features/core/models/song.dart';
 import 'package:playlist_annotator/features/core/models/user.dart';
