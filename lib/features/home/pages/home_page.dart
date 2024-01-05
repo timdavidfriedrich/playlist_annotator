@@ -32,8 +32,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+
+    // TODO: Move this to a FutureBuilder
     Get.find<DataService>().init();
   }
 
