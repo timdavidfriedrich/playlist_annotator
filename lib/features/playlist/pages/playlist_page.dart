@@ -83,10 +83,13 @@ class _PlaylistPageState extends State<PlaylistPage> {
                   ]),
                   const SizedBox(height: Measurements.normalPadding),
                   for (int index = 0; index < widget.playlist.songs.length; index++)
-                    SongTile(
-                      song: widget.playlist.songs.elementAt(index),
-                      localAnnotations: localAnnotations,
-                      controller: controllers.elementAt(index),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: Measurements.smallPadding),
+                      child: SongTile(
+                        song: widget.playlist.songs.elementAt(index),
+                        localAnnotations: localAnnotations,
+                        controller: controllers.elementAt(index),
+                      ),
                     )
                 ],
               ),
