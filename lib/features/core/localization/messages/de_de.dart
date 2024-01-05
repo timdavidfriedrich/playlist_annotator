@@ -7,6 +7,7 @@ const Map<String, String> deDE = {
   "unknown_author_label": "Unbekannter Autor",
   "song_count_label": "@count Songs",
   "collapse_all_label": "Alle einklappen",
+  "no_annotations_label": "Noch keine Anmerkungen.",
   "add_comment_label": "Kommentar hinzufügen",
   "add_first_comment_label": "Ersten Kommentar hinzufügen",
 };

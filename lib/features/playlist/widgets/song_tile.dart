@@ -23,7 +23,6 @@ class _SongTileState extends State<SongTile> {
     }).toList();
 
     return ExpansionTile(
-      maintainState: true,
       controller: widget.controller,
       title: Text(widget.song.name),
       subtitle: Text(widget.song.artist),
@@ -35,23 +34,14 @@ class _SongTileState extends State<SongTile> {
       ),
       initiallyExpanded: false,
       childrenPadding: const EdgeInsets.all(Measurements.normalPadding),
-      expandedCrossAxisAlignment: CrossAxisAlignment.start,
+      expandedAlignment: Alignment.topLeft,
       children: [
         for (var annotation in localAnnotations) AnnotationRow(annotation: annotation),
-        const SizedBox(height: Measurements.smallPadding),
-        Row(
-          children: [
-            Expanded(
-              child: TextField(
-                decoration: InputDecoration(
-                  // TODO: Replace "0 + 1" with the number of annotations + 1
-                  labelText: "add_first_comment_label".trPlural("add_comment_label".tr, 0 + 1),
-                ),
-              ),
-            ),
-            IconButton(onPressed: () {}, icon: const Icon(Icons.thumbs_up_down_rounded))
-          ],
-        )
+        if (localAnnotations.isEmpty)
+          Text(
+            "no_annotations_label".tr,
+            style: TextStyle(color: Theme.of(context).hintColor),
+          ),
       ],
     );
   }

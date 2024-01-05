@@ -7,6 +7,7 @@ const Map<String, String> enUS = {
   "unknown_author_label": "Unknown author",
   "song_count_label": "@count songs",
   "collapse_all_label": "Collapse all",
+  "no_annotations_label": "No annotations, yet.",
   "add_comment_label": "Add a comment",
   "add_first_comment_label": "Add the first comment",
 };
