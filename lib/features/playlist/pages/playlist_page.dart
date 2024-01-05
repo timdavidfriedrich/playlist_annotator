@@ -37,12 +37,10 @@ class _PlaylistPageState extends State<PlaylistPage> {
 
   @override
   Widget build(BuildContext context) {
-    LocalAnnotationController localAnnotationController = Get.put(LocalAnnotationController());
-
     return Scaffold(
       appBar: AppBar(),
       body: FutureBuilder<LocalAnnotationController>(
-          future: localAnnotationController.init(widget.playlist.id),
+          future: Get.put(LocalAnnotationController()).init(widget.playlist.id),
           builder: (context, snapshot) {
             if (snapshot.hasError) return Center(child: Text("${"error_label".tr}: ${snapshot.error}"));
             if (!snapshot.hasData) return const Center(child: CircularProgressIndicator());
