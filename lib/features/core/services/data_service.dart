@@ -18,4 +18,9 @@ class DataService extends GetxService {
 
   RxList<PlaylistPreview> playlistPreviews = <PlaylistPreview>[].obs;
   RxList<Playlist> playlists = <Playlist>[].obs;
+
+  void signOut() {
+    playlistPreviews.clear();
+    playlists.clear();
+  }
 }

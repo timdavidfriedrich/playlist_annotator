@@ -4,7 +4,7 @@ import 'package:playlist_annotator/constants/measurements.dart';
 import 'package:playlist_annotator/features/core/models/annotation.dart';
 import 'package:playlist_annotator/features/core/models/playlist.dart';
 import 'package:playlist_annotator/features/core/models/playlist_preview.dart';
-import 'package:playlist_annotator/features/core/services/local_annotation_controller.dart';
+import 'package:playlist_annotator/features/playlist/controller/local_annotation_controller.dart';
 import 'package:playlist_annotator/features/core/services/spotify_service.dart';
 import 'package:playlist_annotator/features/playlist/controller/playlist_controller.dart';
 import 'package:playlist_annotator/features/playlist/widgets/playlist_cover.dart';

@@ -9,6 +9,10 @@ class LocalStorageService extends GetxService {
     return this;
   }
 
+  Future<void> signOut() async {
+    await _secureSharedPreferences.clearAll();
+  }
+
   Future<void> saveAuthStore(String authStoreData) async {
     return await _secureSharedPreferences.putString("auth_store", authStoreData);
   }

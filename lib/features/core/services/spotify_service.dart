@@ -8,7 +8,7 @@ import 'package:playlist_annotator/constants/links.dart';
 import 'package:playlist_annotator/constants/secrets.dart';
 import 'package:playlist_annotator/features/core/models/playlist.dart';
 import 'package:playlist_annotator/features/core/models/playlist_preview.dart';
-import 'package:playlist_annotator/features/core/services/local_storage_services.dart';
+import 'package:playlist_annotator/features/core/services/local_storage_service.dart';
 import 'package:playlist_annotator/features/core/services/user_service.dart';
 
 class SpotifyService extends GetxService {

@@ -11,4 +11,8 @@ class UserService extends GetxService {
   updateCurrentUser(User? user) {
     currentUser.value = user;
   }
+
+  void signOut() {
+    currentUser.value = null;
+  }
 }

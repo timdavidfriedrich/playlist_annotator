@@ -5,7 +5,7 @@ import 'package:playlist_annotator/constants/links.dart';
 import 'package:playlist_annotator/features/core/models/annotation.dart';
 import 'package:playlist_annotator/features/core/models/playlist_preview.dart';
 import 'package:playlist_annotator/features/core/models/user.dart';
-import 'package:playlist_annotator/features/core/services/local_storage_services.dart';
+import 'package:playlist_annotator/features/core/services/local_storage_service.dart';
 import 'package:playlist_annotator/features/core/services/user_service.dart';
 import 'package:pocketbase/pocketbase.dart';
 
@@ -21,6 +21,11 @@ class PocketbaseService extends GetxService {
     }
     pocketbase = PocketBase(Links.pocketbaseUrl, authStore: store);
     return this;
+  }
+
+  Future<void> signOut() async {
+    store.clear();
+    pocketbase.authStore.clear();
   }
 
   Future<AsyncAuthStore> _loadAsyncAuthStore() async {

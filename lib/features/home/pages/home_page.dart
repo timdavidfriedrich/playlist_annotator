@@ -6,6 +6,7 @@ import 'package:playlist_annotator/features/core/services/data_service.dart';
 import 'package:playlist_annotator/features/home/pages/spotify_playlist_chooser_page.dart';
 import 'package:playlist_annotator/features/home/widgets/playlist_preview_tile.dart';
 import 'package:playlist_annotator/features/playlist/pages/playlist_page.dart';
+import 'package:playlist_annotator/features/settings/pages/settings_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -25,6 +26,10 @@ class _HomePageState extends State<HomePage> {
     Get.to(() => PlaylistPage(playlistPreview: playlistPreview));
   }
 
+  void goToSettings() {
+    Get.to(() => const SettingsPage());
+  }
+
   @override
   Widget build(BuildContext context) {
     final playlistPreviews = Get.find<DataService>().playlistPreviews;
@@ -32,6 +37,13 @@ class _HomePageState extends State<HomePage> {
       return Scaffold(
         appBar: AppBar(
           title: Text("app_title".tr),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.settings_rounded),
+              onPressed: goToSettings,
+            ),
+            const SizedBox(width: Measurements.smallPadding),
+          ],
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: Measurements.normalPadding),

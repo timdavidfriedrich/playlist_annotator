@@ -49,7 +49,10 @@ class ThemeConfig {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(Measurements.defaultBorderRadius),
         ),
-        subtitleTextStyle: GoogleFonts.poppins(fontSize: Theme.of(context).textTheme.labelMedium?.fontSize),
+        subtitleTextStyle: GoogleFonts.poppins(
+          fontSize: Theme.of(context).textTheme.labelMedium?.fontSize,
+          color: colorScheme.onSurface.withOpacity(0.5),
+        ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
