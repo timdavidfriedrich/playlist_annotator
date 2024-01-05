@@ -1,6 +1,9 @@
 const Map<String, String> deDE = {
   "app_title": "Playlist Annotator",
   "error_label": "Fehler",
+  "cancel_label": "Abbrechen",
+  "save_label": "Speichern",
+  "ok_label": "Okay",
   "add_playlist_label": "Playlist hinzufügen",
   "playlist_uri_label": "Playlist URI",
   "sign_in_spotify_label": "Mit Spotify anmelden",

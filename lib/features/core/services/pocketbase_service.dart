@@ -88,8 +88,8 @@ class PocketbaseService extends GetxService {
     return playlistPreviews.map((record) => PlaylistPreview.fromPocketbaseRecord(record)).toList();
   }
 
-  Future<RecordModel> addPlaylistPreview(PlaylistPreview playlistPreview) {
-    return pocketbase.collection('playlistPreviews').create(body: playlistPreview.toPocketbaseRecord());
+  Future<RecordModel> addPlaylistPreview(PlaylistPreview playlistPreview) async {
+    return await pocketbase.collection('playlistPreviews').create(body: playlistPreview.toPocketbaseRecord());
   }
 
   Future<List<Annotation>> getLocalAnnotationsForPlaylistId(String playlistId) async {

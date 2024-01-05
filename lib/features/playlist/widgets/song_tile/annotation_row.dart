@@ -18,6 +18,7 @@ class AnnotationRow extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: Measurements.minimalPadding),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             annotation.userName,
@@ -36,9 +37,11 @@ class AnnotationRow extends StatelessWidget {
             ).icon,
           const SizedBox(width: Measurements.smallPadding),
           if (annotation.comment != null)
-            Text(
-              annotation.comment!,
-              style: TextStyle(color: Theme.of(context).hintColor),
+            Flexible(
+              child: Text(
+                annotation.comment!,
+                style: TextStyle(color: Theme.of(context).hintColor),
+              ),
             ),
         ],
       ),

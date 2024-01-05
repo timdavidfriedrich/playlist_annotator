@@ -6,6 +6,7 @@ import 'package:playlist_annotator/features/core/models/playlist.dart';
 import 'package:playlist_annotator/features/core/models/playlist_preview.dart';
 import 'package:playlist_annotator/features/core/services/local_annotation_controller.dart';
 import 'package:playlist_annotator/features/core/services/spotify_service.dart';
+import 'package:playlist_annotator/features/playlist/controller/playlist_controller.dart';
 import 'package:playlist_annotator/features/playlist/widgets/playlist_cover.dart';
 import 'package:playlist_annotator/features/playlist/widgets/playlist_info_row.dart';
 import 'package:playlist_annotator/features/playlist/widgets/skeletons/skeleton_playlist_info_row.dart';
@@ -34,6 +35,8 @@ class PlaylistPage extends StatelessWidget {
     Future<(Playlist?, List<Annotation>)> getData() async {
       return (await getPlaylistFromPreview(playlistPreview), await getLocalAnnotations());
     }
+
+    Get.put(PlaylistController()).setCurrentPlaylistPreview(playlistPreview);
 
     return Scaffold(
       appBar: AppBar(),
@@ -95,7 +98,8 @@ class PlaylistPage extends StatelessWidget {
                           song: playlist.songs.elementAt(index),
                           localAnnotations: localAnnotations,
                         ),
-                      )
+                      ),
+                    const SizedBox(height: Measurements.largePadding),
                   ],
                 );
               },

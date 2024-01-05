@@ -17,14 +17,16 @@ class ThemeConfig {
   static const ColorScheme _darkColorScheme = ColorScheme(
     brightness: Brightness.dark,
     primary: Color(0xFF1DB954),
-    onPrimary: Colors.black,
-    secondary: Colors.white,
-    onSecondary: Colors.black,
+    onPrimary: Colors.white,
+    secondary: Color(0xFFb91d82),
+    onSecondary: Colors.white,
     error: Colors.red,
     onError: Colors.white,
-    background: Color(0xFF101010),
+    background: Color(0xFF121212),
     onBackground: Colors.white,
-    surface: Color(0x12868686),
+    surface: Color(0xFF181818),
+    surfaceTint: Color(0xFF222222),
+    outline: Color(0xFF262626),
     onSurface: Colors.white,
   );
 
@@ -39,25 +41,9 @@ class ThemeConfig {
       ),
       scaffoldBackgroundColor: colorScheme.background,
       cardColor: colorScheme.surface,
-      sliderTheme: SliderThemeData(
-        activeTrackColor: colorScheme.onBackground,
-        inactiveTrackColor: colorScheme.onSurface.withOpacity(0.5),
-        thumbColor: colorScheme.onBackground,
-        overlayColor: colorScheme.onBackground.withOpacity(0.2),
-        trackHeight: 8,
-        thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 12),
-        trackShape: const RoundedRectSliderTrackShape(),
-        overlayShape: const RoundSliderOverlayShape(overlayRadius: 0),
-      ),
       cardTheme: const CardTheme(
         elevation: 0,
         // margin: EdgeInsets.zero,
-      ),
-      snackBarTheme: SnackBarThemeData(
-        backgroundColor: colorScheme.background,
-        actionTextColor: colorScheme.onBackground,
-        contentTextStyle: TextStyle(color: colorScheme.onBackground),
-        elevation: 0,
       ),
       listTileTheme: ListTileThemeData(
         shape: RoundedRectangleBorder(
@@ -67,67 +53,9 @@ class ThemeConfig {
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: colorScheme.surface,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(Measurements.defaultBorderRadius)),
+        fillColor: colorScheme.surfaceTint,
+        border: const OutlineInputBorder(borderSide: BorderSide.none),
         alignLabelWithHint: true,
-      ),
-      filledButtonTheme: FilledButtonThemeData(
-        style: ButtonStyle(
-          padding: MaterialStateProperty.all(
-            const EdgeInsets.fromLTRB(Measurements.normalPadding, 0, Measurements.normalPadding, 0),
-          ),
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(Measurements.defaultBorderRadius),
-            ),
-          ),
-          backgroundColor: MaterialStateProperty.resolveWith((states) {
-            if (states.contains(MaterialState.disabled)) {
-              return colorScheme.onBackground.withOpacity(0.1);
-            }
-            if (states.contains(MaterialState.pressed) || states.contains(MaterialState.hovered)) {
-              return colorScheme.onBackground.withOpacity(0.2);
-            }
-            return colorScheme.onBackground;
-          }),
-          foregroundColor: MaterialStateProperty.all(colorScheme.onPrimary),
-        ),
-      ),
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ButtonStyle(
-          padding: MaterialStateProperty.all(
-            const EdgeInsets.fromLTRB(
-              Measurements.mediumPadding,
-              Measurements.normalPadding,
-              Measurements.mediumPadding,
-              Measurements.normalPadding,
-            ),
-          ),
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(Measurements.defaultBorderRadius),
-            ),
-          ),
-          backgroundColor: MaterialStateProperty.resolveWith((states) {
-            if (states.contains(MaterialState.disabled)) {
-              return colorScheme.onBackground.withOpacity(0.1);
-            }
-            if (states.contains(MaterialState.pressed) || states.contains(MaterialState.hovered)) {
-              return colorScheme.onBackground.withOpacity(0.2);
-            }
-            return colorScheme.onBackground;
-          }),
-          foregroundColor: MaterialStateProperty.all(colorScheme.onPrimary),
-        ),
-      ),
-      textButtonTheme: TextButtonThemeData(
-        style: ButtonStyle(
-          foregroundColor: MaterialStateProperty.all(colorScheme.primary),
-        ),
-      ),
-      floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: colorScheme.onBackground,
-        foregroundColor: colorScheme.onPrimary,
       ),
       cupertinoOverrideTheme: CupertinoThemeData(
         brightness: Brightness.dark,

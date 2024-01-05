@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:log/log.dart';
 import 'package:playlist_annotator/constants/measurements.dart';
 import 'package:playlist_annotator/features/core/models/annotation.dart';
+import 'package:playlist_annotator/features/core/models/playlist_preview.dart';
 import 'package:playlist_annotator/features/core/models/song.dart';
 import 'package:playlist_annotator/features/core/models/user.dart';
+import 'package:playlist_annotator/features/core/services/pocketbase_service.dart';
 import 'package:playlist_annotator/features/core/services/user_service.dart';
+import 'package:playlist_annotator/features/playlist/controller/playlist_controller.dart';
 import 'package:playlist_annotator/features/playlist/controller/selected_song_controller.dart';
+import 'package:playlist_annotator/features/playlist/widgets/annotation_dialog.dart';
 import 'package:playlist_annotator/features/playlist/widgets/song_tile/annotation_row.dart';
 
 class SongTileExpansionTile extends StatelessWidget {
@@ -19,7 +24,8 @@ class SongTileExpansionTile extends StatelessWidget {
     final List<String> annotationUserIds = localAnnotations.map((e) => e.userId).toList();
     final bool userHasAnnotation = annotationUserIds.contains(currentUser?.id);
 
-    SelectedSongController selectedSongController = Get.find();
+    SelectedSongController selectedSongController = Get.find<SelectedSongController>();
+    PlaylistPreview? currentPlaylistPreview = Get.find<PlaylistController>().currentPlaylistPreview.value;
 
     return Obx(
       () {
@@ -31,6 +37,27 @@ class SongTileExpansionTile extends StatelessWidget {
           } else {
             selectedSongController.selectSongId(song.spotifyId);
           }
+        }
+
+        Future<void> annotate() async {
+          if (currentPlaylistPreview == null) return;
+          if (currentUser == null) return;
+          int? rating;
+          String? comment;
+          (rating, comment) = await showDialog(context: context, builder: (_) => AnnotationDialog(song: song)) ?? (null, null);
+          if (rating == null && (comment == null || comment.isEmpty)) return;
+          Log.debug("rating: $rating, comment: $comment");
+          Log.debug("currentPlaylistPreview.id: ${currentPlaylistPreview.id}");
+          Annotation annotation = Annotation(
+            id: "",
+            userId: currentUser.id,
+            userName: currentUser.name,
+            songSpotifyId: song.spotifyId,
+            playlistId: currentPlaylistPreview.id,
+            rating: rating,
+            comment: comment,
+          );
+          Get.find<PocketbaseService>().saveLocalAnnotation(annotation);
         }
 
         return Column(
@@ -60,7 +87,7 @@ class SongTileExpansionTile extends StatelessWidget {
                 children: [
                   if (isExpanded)
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () => annotate(),
                       icon: Icon(
                         userHasAnnotation ? Icons.edit_rounded : Icons.add_comment_rounded,
                         color: Theme.of(context).colorScheme.onSurface,
