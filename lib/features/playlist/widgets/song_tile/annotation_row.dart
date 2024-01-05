@@ -20,21 +20,27 @@ class AnnotationRow extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            annotation.userName,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: isCurrentUser ? null : Theme.of(context).hintColor,
+          Expanded(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  annotation.userName,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: isCurrentUser ? null : Theme.of(context).hintColor,
+                  ),
+                ),
+                const SizedBox(width: Measurements.minimalPadding),
+                if (![null, 0].contains(annotation.rating))
+                  RatingIcon.fromInt(
+                    annotation.rating!,
+                    size: Theme.of(context).textTheme.labelMedium?.fontSize,
+                    color: isCurrentUser ? null : Theme.of(context).hintColor,
+                  ).icon,
+              ],
             ),
           ),
-          const SizedBox(width: Measurements.minimalPadding),
-          // TODO: Replace icon size with a constant or something
-          if (![null, 0].contains(annotation.rating))
-            RatingIcon.fromInt(
-              annotation.rating!,
-              size: 12,
-              color: isCurrentUser ? null : Theme.of(context).hintColor,
-            ).icon,
           const SizedBox(width: Measurements.smallPadding),
           if (annotation.comment != null)
             Flexible(
