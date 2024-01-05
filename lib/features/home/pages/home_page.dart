@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 import 'package:playlist_annotator/constants/measurements.dart';
 import 'package:playlist_annotator/features/core/models/playlist_preview.dart';
 import 'package:playlist_annotator/features/core/services/data_service.dart';
-import 'package:playlist_annotator/features/core/services/spotify_service.dart';
-import 'package:playlist_annotator/features/core/models/playlist.dart';
 import 'package:playlist_annotator/features/home/pages/spotify_playlist_chooser_page.dart';
 import 'package:playlist_annotator/features/home/widgets/playlist_preview_tile.dart';
 import 'package:playlist_annotator/features/playlist/pages/playlist_page.dart';
@@ -24,16 +22,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> openPlaylist(PlaylistPreview playlistPreview) async {
-    Playlist? playlist = await _getPlaylistFromPreview(playlistPreview);
-    if (playlist == null) return;
-    Get.to(() => PlaylistPage(playlist: playlist));
-  }
-
-  Future<Playlist?> _getPlaylistFromPreview(PlaylistPreview playlistPreview) async {
-    SpotifyService spotifyService = Get.find<SpotifyService>();
-    final token = await spotifyService.getAccessToken();
-    if (token == null) return null;
-    return await spotifyService.getPlaylistByPlaylistPreview(playlistPreview: playlistPreview, token: token);
+    Get.to(() => PlaylistPage(playlistPreview: playlistPreview));
   }
 
   @override

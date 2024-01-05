@@ -6,6 +6,7 @@ class PlaylistPreview {
   final String id;
   final String spotifyId;
   final String name;
+  final String? description;
   final List<String> annotatorIds;
   final String ownerSpotifyNames;
   final String imageUrl;
@@ -14,6 +15,7 @@ class PlaylistPreview {
     required this.id,
     required this.spotifyId,
     required this.name,
+    this.description,
     required this.annotatorIds,
     required this.ownerSpotifyNames,
     required this.imageUrl,
@@ -24,6 +26,7 @@ class PlaylistPreview {
       id: model.id,
       spotifyId: model.data['spotifyId'],
       name: model.data['name'],
+      description: model.data['description'],
       annotatorIds: (model.data['annotators'] as List<dynamic>).map((e) => e.toString()).toList(),
       ownerSpotifyNames: model.data['ownerSpotifyNames'],
       imageUrl: model.data['imageUrl'],
@@ -34,6 +37,7 @@ class PlaylistPreview {
     return {
       'spotifyId': spotifyId,
       'name': name,
+      'description': description,
       'annotators': annotatorIds,
       'ownerSpotifyNames': ownerSpotifyNames,
       'imageUrl': imageUrl,
@@ -46,6 +50,7 @@ class PlaylistPreview {
       id: "PLAYLIST_PREVIEW_NOT_UPLOADED_YET",
       spotifyId: map['id'],
       name: map['name'],
+      description: map['description'],
       annotatorIds: userId != null ? [userId] : [],
       ownerSpotifyNames: map['owner']['display_name'],
       imageUrl: map['images'][0]['url'],
