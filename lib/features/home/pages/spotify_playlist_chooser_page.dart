@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:playlist_annotator/constants/measurements.dart';
 import 'package:playlist_annotator/features/core/models/playlist_preview.dart';
+import 'package:playlist_annotator/features/core/services/data_service.dart';
 import 'package:playlist_annotator/features/core/services/spotify_service.dart';
 import 'package:playlist_annotator/features/home/widgets/playlist_preview_tile.dart';
 
@@ -59,6 +60,11 @@ class SpotifyPlaylistChooserPage extends StatelessWidget {
                     children: [
                       ...List.generate(playlistPreviews.length, (index) {
                         final playlistPreview = playlistPreviews.elementAt(index);
+                        final currentPlaylistPreviews = Get.find<DataService>().playlistPreviews;
+
+                        final bool alreadyInCurrent = currentPlaylistPreviews.any((e) => e.spotifyId == playlistPreview.spotifyId);
+                        if (alreadyInCurrent) return Container();
+
                         return PlaylistPreviewTile(
                           playlistPreview: playlistPreviews.elementAt(index),
                           onTap: () => returnPlaylistPreview(playlistPreview),
