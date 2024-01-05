@@ -1,5 +1,6 @@
 const Map<String, String> deDE = {
   "app_title": "Playlist Annotator",
+  "test_version_label": "(Alpha-Test)",
   "error_label": "Fehler",
   "cancel_label": "Abbrechen",
   "save_label": "Speichern",

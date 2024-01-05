@@ -1,5 +1,6 @@
 const Map<String, String> enUS = {
   "app_title": "Playlist Annotator",
+  "test_version_label": "(alpha test)",
   "error_label": "Error",
   "cancel_label": "Cancel",
   "save_label": "Save",
