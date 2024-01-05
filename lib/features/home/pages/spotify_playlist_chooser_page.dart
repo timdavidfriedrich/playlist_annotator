@@ -35,14 +35,14 @@ class SpotifyPlaylistChooserPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: Measurements.normalPadding),
         child: Column(
           children: [
-            const SizedBox(height: Measurements.normalPadding),
-            TextField(
-              controller: uriController,
-              decoration: InputDecoration(
-                labelText: "playlist_uri_label".tr,
-              ),
-            ),
-            const SizedBox(height: Measurements.normalPadding),
+            // const SizedBox(height: Measurements.normalPadding),
+            // TextField(
+            //   controller: uriController,
+            //   decoration: InputDecoration(
+            //     labelText: "playlist_uri_label".tr,
+            //   ),
+            // ),
+            // const SizedBox(height: Measurements.normalPadding),
             Expanded(
               child: FutureBuilder(
                 future: getPlaylists(),
@@ -54,16 +54,18 @@ class SpotifyPlaylistChooserPage extends StatelessWidget {
                     return Center(child: Text(snapshot.error.toString()));
                   }
                   final playlistPreviews = snapshot.data as List<PlaylistPreview>;
-                  return ListView.builder(
+                  return ListView(
                     shrinkWrap: true,
-                    itemCount: playlistPreviews.length,
-                    itemBuilder: (context, index) {
-                      final playlistPreview = playlistPreviews.elementAt(index);
-                      return PlaylistPreviewTile(
-                        playlistPreview: playlistPreviews.elementAt(index),
-                        onTap: () => returnPlaylistPreview(playlistPreview),
-                      );
-                    },
+                    children: [
+                      ...List.generate(playlistPreviews.length, (index) {
+                        final playlistPreview = playlistPreviews.elementAt(index);
+                        return PlaylistPreviewTile(
+                          playlistPreview: playlistPreviews.elementAt(index),
+                          onTap: () => returnPlaylistPreview(playlistPreview),
+                        );
+                      }),
+                      const SizedBox(height: Measurements.largePadding),
+                    ],
                   );
                 },
               ),
