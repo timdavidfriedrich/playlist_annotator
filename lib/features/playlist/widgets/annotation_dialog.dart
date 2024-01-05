@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:playlist_annotator/constants/measurements.dart';
+import 'package:playlist_annotator/features/core/models/annotation.dart';
 import 'package:playlist_annotator/features/core/models/song.dart';
 import 'package:playlist_annotator/features/core/models/user.dart';
 import 'package:playlist_annotator/features/core/services/user_service.dart';
 import 'package:playlist_annotator/features/playlist/widgets/annotation_dialog/rating_button.dart';
 
 class AnnotationDialog extends StatefulWidget {
+  final Annotation? previousAnnotation;
   final Song song;
-  const AnnotationDialog({super.key, required this.song});
+  const AnnotationDialog({super.key, required this.song, this.previousAnnotation});
 
   @override
   State<AnnotationDialog> createState() => _AnnotationDialogState();
@@ -47,6 +49,19 @@ class _AnnotationDialogState extends State<AnnotationDialog> {
   void _setRating(int newRating) {
     setState(() => _rating = newRating);
     _validate();
+  }
+
+  void _initPreviousAnnotation() {
+    if (widget.previousAnnotation == null) return;
+    _commentController.text = widget.previousAnnotation!.comment ?? "";
+    _rating = widget.previousAnnotation!.rating ?? 0;
+    _validate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _initPreviousAnnotation();
   }
 
   @override

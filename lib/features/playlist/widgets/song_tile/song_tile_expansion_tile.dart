@@ -21,8 +21,7 @@ class SongTileExpansionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final User? currentUser = Get.find<UserService>().currentUser.value;
-    final List<String> annotationUserIds = localAnnotations.map((e) => e.userId).toList();
-    final bool userHasAnnotation = annotationUserIds.contains(currentUser?.id);
+    final Annotation? userAnnotation = localAnnotations.firstWhereOrNull((e) => e.userId == currentUser?.id);
 
     late SelectedSongController? selectedSongController;
     late PlaylistPreview? currentPlaylistPreview;
@@ -51,21 +50,26 @@ class SongTileExpansionTile extends StatelessWidget {
         Future<void> annotate() async {
           if (currentPlaylistPreview == null) return;
           if (currentUser == null) return;
+
           int? rating;
           String? comment;
-          (rating, comment) = await showDialog(context: context, builder: (_) => AnnotationDialog(song: song)) ?? (null, null);
+          (rating, comment) = await showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (_) => AnnotationDialog(previousAnnotation: userAnnotation, song: song),
+          );
+          
           if (rating == null && (comment == null || comment.isEmpty)) return;
-          Log.debug("rating: $rating, comment: $comment");
-          Log.debug("currentPlaylistPreview.id: ${currentPlaylistPreview.id}");
           Annotation annotation = Annotation(
-            id: "",
-            userId: currentUser.id,
-            userName: currentUser.name,
-            songSpotifyId: song.spotifyId,
-            playlistId: currentPlaylistPreview.id,
+            id: userAnnotation?.id ?? "",
+            userId: userAnnotation?.userId ?? currentUser.id,
+            userName: userAnnotation?.userName ?? currentUser.name,
+            songSpotifyId: userAnnotation?.songSpotifyId ?? song.spotifyId,
+            playlistId: userAnnotation?.playlistId ?? currentPlaylistPreview.id,
             rating: rating,
             comment: comment,
           );
+
           Get.find<PocketbaseService>().saveLocalAnnotation(annotation);
         }
 
@@ -98,7 +102,7 @@ class SongTileExpansionTile extends StatelessWidget {
                     IconButton(
                       onPressed: () => annotate(),
                       icon: Icon(
-                        userHasAnnotation ? Icons.edit_rounded : Icons.add_comment_rounded,
+                        userAnnotation == null ? Icons.add_comment_rounded : Icons.edit_rounded,
                         color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
