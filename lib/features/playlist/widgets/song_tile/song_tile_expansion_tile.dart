@@ -5,78 +5,105 @@ import 'package:playlist_annotator/features/core/models/annotation.dart';
 import 'package:playlist_annotator/features/core/models/song.dart';
 import 'package:playlist_annotator/features/core/models/user.dart';
 import 'package:playlist_annotator/features/core/services/user_service.dart';
-import 'package:playlist_annotator/features/playlist/widgets/annotation_row.dart';
+import 'package:playlist_annotator/features/playlist/controller/selected_song_controller.dart';
+import 'package:playlist_annotator/features/playlist/widgets/song_tile/annotation_row.dart';
 
-class SongTileExpansionTile extends StatefulWidget {
+class SongTileExpansionTile extends StatelessWidget {
   final Song song;
   final List<Annotation> localAnnotations;
-  final ExpansionTileController controller;
-  const SongTileExpansionTile({
-    super.key,
-    required this.song,
-    this.localAnnotations = const [],
-    required this.controller,
-  });
-
-  @override
-  State<SongTileExpansionTile> createState() => _SongTileExpansionTileState();
-}
-
-class _SongTileExpansionTileState extends State<SongTileExpansionTile> {
-  bool _isExpanded = false;
-
-  void _setExpansion(bool value) {
-    setState(() => _isExpanded = value);
-  }
+  const SongTileExpansionTile({super.key, required this.song, this.localAnnotations = const []});
 
   @override
   Widget build(BuildContext context) {
     final User? currentUser = Get.find<UserService>().currentUser.value;
-    final List<String> annotationUserIds = widget.localAnnotations.map((e) => e.userId).toList();
+    final List<String> annotationUserIds = localAnnotations.map((e) => e.userId).toList();
     final bool userHasAnnotation = annotationUserIds.contains(currentUser?.id);
-    return ExpansionTile(
-      onExpansionChanged: (value) => _setExpansion(value),
-      controller: widget.controller,
-      tilePadding: const EdgeInsets.symmetric(horizontal: Measurements.smallPadding),
-      title: Text(widget.song.name),
-      subtitle: Text(
-        widget.song.artist,
-        style: TextStyle(color: Theme.of(context).hintColor),
-      ),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Measurements.defaultBorderRadius)),
-      backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
-      leading: ClipRRect(
-        borderRadius: BorderRadius.circular(Measurements.defaultBorderRadius),
-        child: Image.network(widget.song.imageUrl, height: 50, width: 50),
-      ),
-      trailing: Row(
+
+    SelectedSongController selectedSongController = Get.find();
+
+    return Obx(
+      () => Column(
         mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          if (_isExpanded)
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                userHasAnnotation ? Icons.edit_rounded : Icons.add_comment_rounded,
-                color: Theme.of(context).colorScheme.onSurface,
+          ListTile(
+            title: Text(song.name),
+            onTap: () {
+              if (selectedSongController.selectedSongIds.contains(song.spotifyId)) {
+                selectedSongController.deselectSongId(song.spotifyId);
+                return;
+              }
+              Get.find<SelectedSongController>().selectSongId(song.spotifyId);
+            },
+            subtitle: Text(
+              song.artist,
+              style: TextStyle(color: Theme.of(context).hintColor),
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: selectedSongController.selectedSongIds.contains(song.spotifyId)
+                  ? const BorderRadius.vertical(top: Radius.circular(Measurements.defaultBorderRadius))
+                  : BorderRadius.circular(Measurements.defaultBorderRadius),
+            ),
+            tileColor:
+                selectedSongController.selectedSongIds.contains(song.spotifyId) ? Theme.of(context).colorScheme.surfaceVariant : null,
+            leading: ClipRRect(
+              borderRadius: BorderRadius.circular(Measurements.defaultBorderRadius),
+              child: Image.network(song.imageUrl, height: 50, width: 50),
+            ),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (selectedSongController.selectedSongIds.contains(song.spotifyId))
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      userHasAnnotation ? Icons.edit_rounded : Icons.add_comment_rounded,
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                  ),
+                AnimatedRotation(
+                  duration: const Duration(milliseconds: 300),
+                  turns: selectedSongController.selectedSongIds.contains(song.spotifyId) ? 0.5 : 0,
+                  child: Icon(
+                    Icons.expand_more_rounded,
+                    color: Theme.of(context).hintColor,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          AnimatedSize(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeOut,
+            child: Container(
+              padding: const EdgeInsets.fromLTRB(
+                Measurements.normalPadding,
+                Measurements.minimalPadding,
+                Measurements.normalPadding,
+                Measurements.normalPadding,
+              ),
+              height: selectedSongController.selectedSongIds.contains(song.spotifyId) ? null : 0,
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surfaceVariant,
+                borderRadius: const BorderRadius.vertical(bottom: Radius.circular(Measurements.defaultBorderRadius)),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  for (var annotation in localAnnotations) AnnotationRow(annotation: annotation),
+                  if (localAnnotations.isEmpty)
+                    Text(
+                      "no_annotations_label".tr,
+                      style: TextStyle(color: Theme.of(context).hintColor),
+                    ),
+                ],
               ),
             ),
-          Icon(
-            _isExpanded ? Icons.expand_less_rounded : Icons.expand_more_rounded,
-            color: Theme.of(context).hintColor,
-          ),
+          )
         ],
       ),
-      initiallyExpanded: _isExpanded,
-      childrenPadding: const EdgeInsets.all(Measurements.normalPadding),
-      expandedAlignment: Alignment.topLeft,
-      children: [
-        for (var annotation in widget.localAnnotations) AnnotationRow(annotation: annotation),
-        if (widget.localAnnotations.isEmpty)
-          Text(
-            "no_annotations_label".tr,
-            style: TextStyle(color: Theme.of(context).hintColor),
-          ),
-      ],
     );
   }
 }

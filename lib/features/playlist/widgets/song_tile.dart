@@ -8,8 +8,7 @@ import 'package:playlist_annotator/features/playlist/widgets/song_tile/song_tile
 class SongTile extends StatefulWidget {
   final Song song;
   final List<Annotation> localAnnotations;
-  final ExpansionTileController controller;
-  const SongTile({super.key, required this.song, this.localAnnotations = const [], required this.controller});
+  const SongTile({super.key, required this.song, this.localAnnotations = const []});
 
   @override
   State<SongTile> createState() => _SongTileState();
@@ -29,7 +28,6 @@ class _SongTileState extends State<SongTile> {
           child: SongTileExpansionTile(
             song: widget.song,
             localAnnotations: localAnnotations,
-            controller: widget.controller,
           ),
         ),
         const SizedBox(
