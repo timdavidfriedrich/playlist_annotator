@@ -4,6 +4,7 @@ const Map<String, String> deDE = {
   "cancel_label": "Abbrechen",
   "save_label": "Speichern",
   "ok_label": "Okay",
+  "empty_home_greeting": "Willkommen @name!\nFüge deine erste Playlist hinzu.",
   "settings_label": "Einstellungen",
   "linked_account_label": "Verknüpftes Konto",
   "credits_label": "Credits",

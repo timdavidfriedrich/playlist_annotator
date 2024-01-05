@@ -4,6 +4,7 @@ const Map<String, String> enUS = {
   "cancel_label": "Cancel",
   "save_label": "Save",
   "ok_label": "Okay",
+  "empty_home_greeting": "Welcome @name!\nAdd your first playlist.",
   "settings_label": "Settings",
   "linked_account_label": "Linked account",
   "credits_label": "Credits",
