@@ -3,6 +3,7 @@ import 'package:pocketbase/pocketbase.dart';
 class Annotation {
   final String id;
   final String songSpotifyId;
+  final String userSpotifyId;
   final String userId;
   final String userName;
   final int? rating;
@@ -12,6 +13,7 @@ class Annotation {
   Annotation({
     required this.id,
     required this.songSpotifyId,
+    required this.userSpotifyId,
     required this.userId,
     required this.userName,
     this.rating,
@@ -22,6 +24,7 @@ class Annotation {
   Annotation.global({
     required this.id,
     required this.songSpotifyId,
+    required this.userSpotifyId,
     required this.userId,
     required this.userName,
     this.rating,
@@ -31,7 +34,8 @@ class Annotation {
   Map<String, dynamic> toPocketbaseRecord() {
     return {
       "songSpotifyId": songSpotifyId,
-      "userId": userId,
+      "userSpotifyId": userSpotifyId,
+      "user": userId,
       "userName": userName,
       "rating": rating,
       "comment": comment,
@@ -44,7 +48,8 @@ class Annotation {
       return Annotation.global(
         id: model.id,
         songSpotifyId: model.data["songSpotifyId"],
-        userId: model.data["userId"],
+        userSpotifyId: model.data["userSpotifyId"],
+        userId: model.data["user"],
         userName: model.data["userName"],
         rating: model.data["rating"],
         comment: model.data["comment"],
@@ -54,7 +59,8 @@ class Annotation {
       id: model.id,
       playlistId: model.data["playlist"],
       songSpotifyId: model.data["songSpotifyId"],
-      userId: model.data["userId"],
+      userSpotifyId: model.data["userSpotifyId"],
+      userId: model.data["user"],
       userName: model.data["userName"],
       rating: model.data["rating"],
       comment: model.data["comment"],

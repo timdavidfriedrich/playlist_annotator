@@ -58,10 +58,11 @@ class SongTileExpansionTile extends StatelessWidget {
             barrierDismissible: false,
             builder: (_) => AnnotationDialog(previousAnnotation: userAnnotation, song: song),
           );
-          
+
           if (rating == null && (comment == null || comment.isEmpty)) return;
           Annotation annotation = Annotation(
             id: userAnnotation?.id ?? "",
+            userSpotifyId: userAnnotation?.userSpotifyId ?? currentUser.spotifyId,
             userId: userAnnotation?.userId ?? currentUser.id,
             userName: userAnnotation?.userName ?? currentUser.name,
             songSpotifyId: userAnnotation?.songSpotifyId ?? song.spotifyId,

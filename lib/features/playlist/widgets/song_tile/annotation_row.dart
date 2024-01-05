@@ -14,7 +14,7 @@ class AnnotationRow extends StatelessWidget {
     final bool hasRating = ![null, 0].contains(annotation.rating);
     final bool hasComment = annotation.comment != null && annotation.comment!.isNotEmpty;
     if (!hasRating && !hasComment) return Container();
-    final bool isCurrentUser = Get.find<UserService>().currentUser.value?.name == annotation.userName;
+    final bool isCurrentUser = Get.find<UserService>().currentUser.value?.spotifyId == annotation.userSpotifyId;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: Measurements.minimalPadding),
       child: Row(

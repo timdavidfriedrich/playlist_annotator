@@ -31,6 +31,13 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Get.find<DataService>().init();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final playlistPreviews = Get.find<DataService>().playlistPreviews;
     return Obx(() {
