@@ -24,18 +24,27 @@ class SongTileExpansionTile extends StatelessWidget {
     final List<String> annotationUserIds = localAnnotations.map((e) => e.userId).toList();
     final bool userHasAnnotation = annotationUserIds.contains(currentUser?.id);
 
-    SelectedSongController selectedSongController = Get.find<SelectedSongController>();
-    PlaylistPreview? currentPlaylistPreview = Get.find<PlaylistController>().currentPlaylistPreview.value;
+    late SelectedSongController? selectedSongController;
+    late PlaylistPreview? currentPlaylistPreview;
+    try {
+      selectedSongController = Get.find<SelectedSongController>();
+      currentPlaylistPreview = Get.find<PlaylistController>().currentPlaylistPreview.value;
+    } catch (e) {
+      Log.error("Could not find SelectedSongController or PlaylistController: $e");
+    }
 
+    if (selectedSongController == null || currentPlaylistPreview == null) {
+      return Center(child: Text("error_label".tr));
+    }
     return Obx(
       () {
-        final bool isExpanded = selectedSongController.selectedSongIds.contains(song.spotifyId);
+        final bool isExpanded = selectedSongController!.selectedSongIds.contains(song.spotifyId);
 
         void toggleExpansion() {
           if (isExpanded) {
-            selectedSongController.deselectSongId(song.spotifyId);
+            selectedSongController!.deselectSongId(song.spotifyId);
           } else {
-            selectedSongController.selectSongId(song.spotifyId);
+            selectedSongController!.selectSongId(song.spotifyId);
           }
         }
 
