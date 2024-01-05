@@ -5,7 +5,7 @@ class RatingIcon {
 
   const RatingIcon._(this.icon);
 
-  factory RatingIcon.fromInt(int rating, {double size = 24, Color? color}) {
+  factory RatingIcon.fromInt(int rating, {double? size = 24, Color? color}) {
     switch (rating) {
       case -1:
         return RatingIcon._(Icon(Icons.thumb_down_rounded, size: size, color: color));
