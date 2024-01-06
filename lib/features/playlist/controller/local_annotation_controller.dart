@@ -5,8 +5,8 @@ import 'package:playlist_annotator/features/core/services/pocketbase_service.dar
 class LocalAnnotationController extends GetxController {
   RxList<Annotation> annotations = <Annotation>[].obs;
 
-  Future<LocalAnnotationController> init(String playlistId) async {
-    annotations.value = await Get.find<PocketbaseService>().getLocalAnnotationsForPlaylistId(playlistId);
+  Future<LocalAnnotationController> init(String playlistSpotifyId) async {
+    annotations.value = await Get.find<PocketbaseService>().getLocalAnnotationsByPlaylistSpotifyId(playlistSpotifyId);
     return this;
   }
 

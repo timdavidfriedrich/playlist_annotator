@@ -8,6 +8,7 @@ import 'package:playlist_annotator/features/core/models/song.dart';
 import 'package:playlist_annotator/features/core/models/user.dart';
 import 'package:playlist_annotator/features/core/services/pocketbase_service.dart';
 import 'package:playlist_annotator/features/core/services/user_service.dart';
+import 'package:playlist_annotator/features/playlist/controller/local_annotation_controller.dart';
 import 'package:playlist_annotator/features/playlist/controller/playlist_controller.dart';
 import 'package:playlist_annotator/features/playlist/controller/selected_song_controller.dart';
 import 'package:playlist_annotator/features/playlist/widgets/annotation_dialog.dart';
@@ -21,7 +22,7 @@ class SongTileExpansionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final User? currentUser = Get.find<UserService>().currentUser.value;
-    final Annotation? userAnnotation = localAnnotations.firstWhereOrNull((e) => e.userId == currentUser?.id);
+    Annotation? userAnnotation = localAnnotations.firstWhereOrNull((e) => e.userId == currentUser?.id);
 
     late SelectedSongController? selectedSongController;
     late PlaylistPreview? currentPlaylistPreview;
@@ -53,20 +54,30 @@ class SongTileExpansionTile extends StatelessWidget {
 
           int? rating;
           String? comment;
-          (rating, comment) = await showDialog(
+          final (int?, String?)? result = await showDialog(
             context: context,
             barrierDismissible: false,
             builder: (_) => AnnotationDialog(previousAnnotation: userAnnotation, song: song),
           );
 
-          if (rating == null && (comment == null || comment.isEmpty)) return;
+          if (result == null) return;
+
+          if (result == (null, null) && userAnnotation != null) {
+            Log.debug("userAnnotation.id: ${userAnnotation.id}");
+            await Get.find<PocketbaseService>().removeLocalAnnotationById(userAnnotation.id);
+            Get.find<LocalAnnotationController>().annotations.removeWhere((e) => e.id == userAnnotation.id);
+            return;
+          }
+
+          (rating, comment) = result;
+
           Annotation annotation = Annotation(
             id: userAnnotation?.id ?? "",
             userSpotifyId: userAnnotation?.userSpotifyId ?? currentUser.spotifyId,
             userId: userAnnotation?.userId ?? currentUser.id,
             userName: userAnnotation?.userName ?? currentUser.name,
             songSpotifyId: userAnnotation?.songSpotifyId ?? song.spotifyId,
-            playlistId: userAnnotation?.playlistId ?? currentPlaylistPreview.id,
+            playlistSpotifyId: userAnnotation?.playlistSpotifyId ?? currentPlaylistPreview.spotifyId,
             rating: rating,
             comment: comment,
           );

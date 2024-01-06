@@ -10,6 +10,11 @@ const Map<String, String> deDE = {
   "linked_account_label": "Verknüpftes Konto",
   "credits_label": "Credits",
   "add_playlist_label": "Playlist hinzufügen",
+  "remove_label": "Entfernen",
+  "remove_playlist_label": "Playlist entfernen",
+  "keep_annotations_after_deletion_label": "Anmerkungen behalten",
+  "keep_annotations_after_deletion_explanation_label":
+      "Wenn aktiviert, werden die Anmerkungen noch da sein, wenn du diese Playlist erneut hinzufügst.",
   "playlist_uri_label": "Playlist URI",
   "sign_in_spotify_label": "Mit Spotify anmelden",
   "unknown_author_label": "Unbekannter Autor",

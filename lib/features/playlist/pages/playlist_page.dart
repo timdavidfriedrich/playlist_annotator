@@ -28,7 +28,7 @@ class PlaylistPage extends StatelessWidget {
     }
 
     Future<List<Annotation>> getLocalAnnotations() async {
-      LocalAnnotationController localAnnotationController = await Get.put(LocalAnnotationController()).init(playlistPreview.id);
+      LocalAnnotationController localAnnotationController = await Get.put(LocalAnnotationController()).init(playlistPreview.spotifyId);
       return localAnnotationController.annotations;
     }
 

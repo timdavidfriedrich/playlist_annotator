@@ -97,8 +97,14 @@ class PocketbaseService extends GetxService {
     return await pocketbase.collection('playlistPreviews').create(body: playlistPreview.toPocketbaseRecord());
   }
 
-  Future<List<Annotation>> getLocalAnnotationsForPlaylistId(String playlistId) async {
-    final List<RecordModel> records = await pocketbase.collection('localAnnotations').getFullList(filter: "playlist = \"$playlistId\"");
+  Future<void> removePlaylistPreviewById(String id) async {
+    await pocketbase.collection('playlistPreviews').delete(id);
+  }
+
+  Future<List<Annotation>> getLocalAnnotationsByPlaylistSpotifyId(String playlistSpotifyId) async {
+    final List<RecordModel> records = await pocketbase.collection('localAnnotations').getFullList(
+          filter: "playlistSpotifyId = \"$playlistSpotifyId\"",
+        );
     return records.map((record) => Annotation.fromPocketbaseRecord(record)).toList();
   }
 
@@ -109,5 +115,9 @@ class PocketbaseService extends GetxService {
       Log.error(e);
       return await pocketbase.collection('localAnnotations').create(body: annotation.toPocketbaseRecord());
     }
+  }
+
+  Future<void> removeLocalAnnotationById(String id) async {
+    await pocketbase.collection('localAnnotations').delete(id);
   }
 }

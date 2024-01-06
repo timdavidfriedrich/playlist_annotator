@@ -5,7 +5,6 @@ import 'package:get/get_utils/get_utils.dart';
 import 'package:get/instance_manager.dart';
 import 'package:playlist_annotator/config/themes/theme_config.dart';
 import 'package:playlist_annotator/features/core/localization/messages.dart';
-import 'package:playlist_annotator/features/core/models/user.dart';
 import 'package:playlist_annotator/features/core/services/local_storage_service.dart';
 import 'package:playlist_annotator/features/core/services/auth_service.dart';
 import 'package:playlist_annotator/features/core/services/data_service.dart';
@@ -38,7 +37,7 @@ class PlaylistAnnotator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    User? currentUser = Get.find<UserService>().currentUser.value;
+    UserService userService = Get.find<UserService>();
 
     return GetMaterialApp(
       title: "app_title".tr,
@@ -49,7 +48,7 @@ class PlaylistAnnotator extends StatelessWidget {
       theme: ThemeConfig.light(context),
       darkTheme: ThemeConfig.dark(context),
       home: Obx(() {
-        return _buildHome(currentUser != null);
+        return _buildHome(userService.currentUser.value != null);
       }),
     );
   }

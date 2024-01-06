@@ -8,7 +8,7 @@ class Annotation {
   final String userName;
   final int? rating;
   final String? comment;
-  final String? playlistId;
+  final String? playlistSpotifyId;
 
   Annotation({
     required this.id,
@@ -18,7 +18,7 @@ class Annotation {
     required this.userName,
     this.rating,
     this.comment,
-    required this.playlistId,
+    required this.playlistSpotifyId,
   });
 
   Annotation.global({
@@ -29,7 +29,7 @@ class Annotation {
     required this.userName,
     this.rating,
     this.comment,
-  }) : playlistId = null;
+  }) : playlistSpotifyId = null;
 
   Map<String, dynamic> toPocketbaseRecord() {
     return {
@@ -39,7 +39,7 @@ class Annotation {
       "userName": userName,
       "rating": rating,
       "comment": comment,
-      ...playlistId != null ? {"playlist": playlistId} : {},
+      ...playlistSpotifyId != null ? {"playlistSpotifyId": playlistSpotifyId} : {},
     };
   }
 
@@ -57,7 +57,7 @@ class Annotation {
     }
     return Annotation(
       id: model.id,
-      playlistId: model.data["playlist"],
+      playlistSpotifyId: model.data["playlistSpotifyId"],
       songSpotifyId: model.data["songSpotifyId"],
       userSpotifyId: model.data["userSpotifyId"],
       userId: model.data["user"],

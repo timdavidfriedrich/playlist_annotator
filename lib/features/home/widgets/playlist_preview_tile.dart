@@ -12,6 +12,7 @@ class PlaylistPreviewTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
+        contentPadding: EdgeInsets.only(left: Measurements.normalPadding, right: onActionTap == null ? Measurements.normalPadding : 0),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         title: Text(playlistPreview.name),
         subtitle: Text(playlistPreview.ownerSpotifyNames),

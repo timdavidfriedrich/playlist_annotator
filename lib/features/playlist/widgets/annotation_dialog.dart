@@ -20,6 +20,8 @@ class AnnotationDialog extends StatefulWidget {
 class _AnnotationDialogState extends State<AnnotationDialog> {
   final TextEditingController _commentController = TextEditingController();
 
+  bool _isRemoving = false;
+
   int _rating = 0;
   final int _maxLines = 5;
   final int _maxLength = 100;
@@ -43,7 +45,12 @@ class _AnnotationDialogState extends State<AnnotationDialog> {
   }
 
   void _cancel() {
-    Get.back<(int?, String?)>(result: (null, null));
+    Get.back();
+  }
+
+  Future<void> _delete() async {
+    if (widget.previousAnnotation == null) return;
+    Get.back<(int?, String?)?>(result: (null, null));
   }
 
   void _setRating(int newRating) {
@@ -67,6 +74,7 @@ class _AnnotationDialogState extends State<AnnotationDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog.adaptive(
+      insetPadding: const EdgeInsets.all(Measurements.normalPadding),
       title: Row(
         children: [
           ClipRRect(
@@ -93,14 +101,25 @@ class _AnnotationDialogState extends State<AnnotationDialog> {
       ),
       content: TextField(
         controller: _commentController,
-        autofocus: true,
         maxLines: _maxLines,
         maxLength: _maxLength,
+        decoration: InputDecoration(
+          hintText: "add_comment_label".tr,
+        ),
         maxLengthEnforcement: MaxLengthEnforcement.none,
         onSubmitted: (_) => _returnAnnotation(),
         onChanged: (_) => _validate(),
       ),
+      actionsAlignment: widget.previousAnnotation == null ? null : MainAxisAlignment.spaceBetween,
       actions: [
+        if (widget.previousAnnotation != null) ...[
+          IconButton(
+            onPressed: _delete,
+            icon: _isRemoving
+                ? CircularProgressIndicator.adaptive(valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.error))
+                : Icon(Icons.delete_rounded, color: Theme.of(context).colorScheme.error),
+          ),
+        ],
         TextButton(
           onPressed: _cancel,
           child: Text("cancel_label".tr),
