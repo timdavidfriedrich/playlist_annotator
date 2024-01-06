@@ -35,20 +35,6 @@ class SettingsPage extends StatelessWidget {
                 icon: const Icon(Icons.logout_rounded),
               ),
             ),
-          const ListTile(
-            title: Text("Irgendeine Einstellung"),
-            subtitle: Text("hi hi, was geht. ich bin eine kleine einstellung - als wäre ich ein close-up, lol."),
-          ),
-          ListTile(
-            title: Text("credits_label".tr),
-            subtitle: const Text(
-              "A heartfelt thank you to Elisabeth Endres for her unwavering support "
-              "since the inception of our journey. Her generosity, through substantial donations, "
-              "including a notable contribution of €2, has been instrumental in shaping and enhancing "
-              "our platform. We are immensely grateful for her commitment and belief in our vision."
-              "\n\nDeveloped by Tim David Friedrich.",
-            ),
-          ),
         ],
       ),
     );
