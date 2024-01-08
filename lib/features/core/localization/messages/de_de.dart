@@ -24,4 +24,5 @@ const Map<String, String> deDE = {
   "no_annotations_label": "Noch keine Anmerkungen.",
   "add_comment_label": "Kommentar hinzufügen",
   "add_first_comment_label": "Ersten Kommentar hinzufügen",
+  "open_in_spotify": "In Spotify öffnen",
 };

@@ -23,4 +23,5 @@ const Map<String, String> enUS = {
   "no_annotations_label": "No annotations, yet.",
   "add_comment_label": "Add a comment",
   "add_first_comment_label": "Add the first comment",
+  "open_in_spotify": "Open in Spotify",
 };
