@@ -5,10 +5,10 @@ import 'package:playlist_annotator/constants/measurements.dart';
 import 'package:playlist_annotator/features/core/models/annotation.dart';
 import 'package:playlist_annotator/features/core/models/playlist.dart';
 import 'package:playlist_annotator/features/core/models/playlist_preview.dart';
+import 'package:playlist_annotator/features/core/widgets/cover_image.dart';
 import 'package:playlist_annotator/features/playlist/controller/local_annotation_controller.dart';
 import 'package:playlist_annotator/features/core/services/spotify_service.dart';
 import 'package:playlist_annotator/features/playlist/controller/playlist_controller.dart';
-import 'package:playlist_annotator/features/playlist/widgets/playlist_cover.dart';
 import 'package:playlist_annotator/features/playlist/widgets/playlist_info_row.dart';
 import 'package:playlist_annotator/features/playlist/widgets/skeletons/skeleton_playlist_info_row.dart';
 import 'package:playlist_annotator/features/playlist/widgets/skeletons/skeleton_song_tile.dart';
@@ -53,7 +53,7 @@ class PlaylistPage extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width / 4),
-            child: PlaylistCover(playlistPreview: playlistPreview),
+            child: CoverImage(imageUrl: playlistPreview.imageUrl, width: MediaQuery.of(context).size.width / 2),
           ),
           const SizedBox(height: Measurements.mediumPadding),
           Padding(

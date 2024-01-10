@@ -8,6 +8,7 @@ import 'package:playlist_annotator/features/core/models/song.dart';
 import 'package:playlist_annotator/features/core/models/user.dart';
 import 'package:playlist_annotator/features/core/services/pocketbase_service.dart';
 import 'package:playlist_annotator/features/core/services/user_service.dart';
+import 'package:playlist_annotator/features/core/widgets/cover_image.dart';
 import 'package:playlist_annotator/features/playlist/controller/local_annotation_controller.dart';
 import 'package:playlist_annotator/features/playlist/controller/playlist_controller.dart';
 import 'package:playlist_annotator/features/playlist/controller/selected_song_controller.dart';
@@ -103,10 +104,7 @@ class SongTileExpansionTile extends StatelessWidget {
                     : BorderRadius.circular(Measurements.defaultBorderRadius),
               ),
               tileColor: isExpanded ? Theme.of(context).colorScheme.surfaceVariant : null,
-              leading: ClipRRect(
-                borderRadius: BorderRadius.circular(Measurements.defaultBorderRadius),
-                child: Image.network(song.imageUrl, height: 50, width: 50),
-              ),
+              leading: CoverImage(imageUrl: song.imageUrl),
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [

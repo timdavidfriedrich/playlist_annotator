@@ -6,6 +6,7 @@ import 'package:playlist_annotator/features/core/models/annotation.dart';
 import 'package:playlist_annotator/features/core/models/song.dart';
 import 'package:playlist_annotator/features/core/models/user.dart';
 import 'package:playlist_annotator/features/core/services/user_service.dart';
+import 'package:playlist_annotator/features/core/widgets/cover_image.dart';
 import 'package:playlist_annotator/features/playlist/widgets/annotation_dialog/rating_button.dart';
 
 class AnnotationDialog extends StatefulWidget {
@@ -77,10 +78,7 @@ class _AnnotationDialogState extends State<AnnotationDialog> {
       insetPadding: const EdgeInsets.all(Measurements.normalPadding),
       title: Row(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(Measurements.defaultBorderRadius),
-            child: Image.network(widget.song.imageUrl, height: 48, width: 48),
-          ),
+          CoverImage(imageUrl: widget.song.imageUrl),
           const SizedBox(width: Measurements.smallPadding),
           Expanded(
             child: Column(

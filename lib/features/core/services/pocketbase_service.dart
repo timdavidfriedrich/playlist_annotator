@@ -1,5 +1,5 @@
-import 'package:fetch_client/fetch_client.dart';
-import 'package:flutter/foundation.dart';
+// import 'package:fetch_client/fetch_client.dart';
+// import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:get/get.dart';
 import 'package:log/log.dart';
 import 'package:playlist_annotator/constants/links.dart';
@@ -24,7 +24,7 @@ class PocketbaseService extends GetxService {
     pocketbase = PocketBase(
       Links.pocketbaseUrl,
       authStore: store,
-      httpClientFactory: kIsWeb ? () => FetchClient(mode: RequestMode.cors) : null,
+      // httpClientFactory: kIsWeb ? () => FetchClient(mode: RequestMode.cors) : null,
     );
     return this;
   }

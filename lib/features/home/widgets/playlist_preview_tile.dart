@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:playlist_annotator/constants/measurements.dart';
 import 'package:playlist_annotator/features/core/models/playlist_preview.dart';
+import 'package:playlist_annotator/features/core/widgets/cover_image.dart';
 
 class PlaylistPreviewTile extends StatelessWidget {
   final PlaylistPreview playlistPreview;
@@ -23,10 +24,7 @@ class PlaylistPreviewTile extends StatelessWidget {
                 color: Theme.of(context).hintColor,
                 onPressed: onActionTap,
               ),
-        leading: ClipRRect(
-          borderRadius: BorderRadius.circular(Measurements.defaultBorderRadius),
-          child: Image.network(playlistPreview.imageUrl, height: 50, width: 50),
-        ),
+        leading: CoverImage(imageUrl: playlistPreview.imageUrl),
         onTap: onTap,
       ),
     );
