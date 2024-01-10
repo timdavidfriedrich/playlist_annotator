@@ -57,22 +57,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.3"
-  cryptography:
-    dependency: transitive
-    description:
-      name: cryptography
-      sha256: d146b76d33d94548cf035233fbc2f4338c1242fa119013bead807d033fc4ae05
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.7.0"
-  cryptography_flutter:
-    dependency: transitive
-    description:
-      name: cryptography_flutter
-      sha256: a7fc3f0de42fb0947cbf213257aa3a69c89df561d104723ede8050658621f292
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.3.2"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -110,30 +94,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_custom_tabs:
-    dependency: "direct main"
-    description:
-      name: flutter_custom_tabs
-      sha256: e90e5b7cad5648aeb0e1ed04aa3c0cada62d86f3b5d4aaef488ab7de61ec2a9f
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.2.1"
-  flutter_custom_tabs_platform_interface:
-    dependency: transitive
-    description:
-      name: flutter_custom_tabs_platform_interface
-      sha256: "1d6b9eb6c5671b21511fdb47babf18aa65982784373986c003aaf67ca78798ad"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.2.0"
-  flutter_custom_tabs_web:
-    dependency: transitive
-    description:
-      name: flutter_custom_tabs_web
-      sha256: dbb5689a97c2398aa5dbcfc9cd59cffea5518ec815e9d23def448dc143cb02be
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -143,7 +103,7 @@ packages:
     source: hosted
     version: "3.0.1"
   flutter_secure_storage:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_secure_storage
       sha256: "5abe3d5c25ab435e48c47fb61bac25606062a305fac637c2f020e25abd30014a"
@@ -295,14 +255,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
-  package_info:
-    dependency: transitive
-    description:
-      name: package_info
-      sha256: "6c07d9d82c69e16afeeeeb6866fe43985a20b3b50df243091bfc4a4ad2b03b75"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.2"
   path:
     dependency: transitive
     description:
@@ -383,14 +335,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.17.0"
-  secure_shared_preferences:
-    dependency: "direct main"
-    description:
-      name: secure_shared_preferences
-      sha256: a8f6946c361e82d5c2de616c52ebf35bf6f80082d2cdc6c35c13b8f8a8107248
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.4"
   share_plus:
     dependency: "direct main"
     description:
@@ -407,62 +351,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.3.1"
-  shared_preferences:
-    dependency: transitive
-    description:
-      name: shared_preferences
-      sha256: "81429e4481e1ccfb51ede496e916348668fd0921627779233bd24cc3ff6abd02"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.2"
-  shared_preferences_android:
-    dependency: transitive
-    description:
-      name: shared_preferences_android
-      sha256: "8568a389334b6e83415b6aae55378e158fbc2314e074983362d20c562780fb06"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.1"
-  shared_preferences_foundation:
-    dependency: transitive
-    description:
-      name: shared_preferences_foundation
-      sha256: "7bf53a9f2d007329ee6f3df7268fd498f8373602f943c975598bbb34649b62a7"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.3.4"
-  shared_preferences_linux:
-    dependency: transitive
-    description:
-      name: shared_preferences_linux
-      sha256: "9f2cbcf46d4270ea8be39fa156d86379077c8a5228d9dfdb1164ae0bb93f1faa"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.3.2"
-  shared_preferences_platform_interface:
-    dependency: transitive
-    description:
-      name: shared_preferences_platform_interface
-      sha256: d4ec5fc9ebb2f2e056c617112aa75dcf92fc2e4faaf2ae999caa297473f75d8a
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.3.1"
-  shared_preferences_web:
-    dependency: transitive
-    description:
-      name: shared_preferences_web
-      sha256: d762709c2bbe80626ecc819143013cc820fa49ca5e363620ee20a8b15a3e3daf
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.1"
-  shared_preferences_windows:
-    dependency: transitive
-    description:
-      name: shared_preferences_windows
-      sha256: "841ad54f3c8381c480d0c9b508b89a34036f512482c407e6df7a9c4aa2ef8f59"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.3.2"
   skeletonizer:
     dependency: "direct main"
     description:
