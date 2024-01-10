@@ -48,7 +48,7 @@ class PocketbaseService extends GetxService {
 
   Future<RecordAuth?> signInWithSpotify() async {
     final authData = await pocketbase.collection('users').authWithOAuth2('spotify', (uri) async {
-      await launchUrl(uri, mode: LaunchMode.inAppWebView);
+      await launchUrl(uri);
     }).catchError((e) {
       Log.error(e);
       return RecordAuth();
