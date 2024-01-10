@@ -13,7 +13,7 @@ import 'package:playlist_annotator/features/core/services/spotify_service.dart';
 import 'package:playlist_annotator/features/core/services/user_service.dart';
 import 'package:playlist_annotator/features/home/pages/home_page.dart';
 import 'package:playlist_annotator/features/onboarding/pages/sign_in_page.dart';
-
+ 
 Future<void> main() async {
   await initServices();
   runApp(const PlaylistAnnotator());

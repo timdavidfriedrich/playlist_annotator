@@ -1,4 +1,5 @@
-import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
+import 'package:fetch_client/fetch_client.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:log/log.dart';
 import 'package:playlist_annotator/constants/links.dart';
@@ -8,6 +9,7 @@ import 'package:playlist_annotator/features/core/models/user.dart';
 import 'package:playlist_annotator/features/core/services/local_storage_service.dart';
 import 'package:playlist_annotator/features/core/services/user_service.dart';
 import 'package:pocketbase/pocketbase.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PocketbaseService extends GetxService {
   late String? initialAuthStoreData;
@@ -19,7 +21,11 @@ class PocketbaseService extends GetxService {
     if (store.isValid) {
       _updateCurrentUser(store);
     }
-    pocketbase = PocketBase(Links.pocketbaseUrl, authStore: store);
+    pocketbase = PocketBase(
+      Links.pocketbaseUrl,
+      authStore: store,
+      httpClientFactory: kIsWeb ? () => FetchClient(mode: RequestMode.cors) : null,
+    );
     return this;
   }
 
@@ -42,7 +48,10 @@ class PocketbaseService extends GetxService {
 
   Future<RecordAuth?> signInWithSpotify() async {
     final authData = await pocketbase.collection('users').authWithOAuth2('spotify', (uri) async {
-      await launch(uri.toString());
+      await launchUrl(uri, mode: LaunchMode.inAppWebView);
+    }).catchError((e) {
+      Log.error(e);
+      return RecordAuth();
     }).then((RecordAuth response) async {
       await _updateRecordIfNecessary(response);
       return response;
