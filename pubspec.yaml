@@ -22,8 +22,8 @@ dependencies:
   get: ^4.6.6  
   http: ^1.1.0
   flutter_custom_tabs: ^1.2.1
+  flutter_secure_storage: ^5.1.2
   pocketbase: ^0.17.0
-  secure_shared_preferences: ^0.0.4
   google_fonts: ^6.1.0
   skeletonizer: ^1.0.0
   share_plus: ^7.2.1
