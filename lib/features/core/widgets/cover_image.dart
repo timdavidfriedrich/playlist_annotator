@@ -22,24 +22,21 @@ class CoverImage extends StatelessWidget {
       width = 50;
     }
 
-    return AspectRatio(
-      aspectRatio: 1,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(Measurements.defaultBorderRadius),
-        child: CachedNetworkImage(
-          imageUrl: imageUrl,
-          height: height,
-          width: width,
-          placeholder: (context, url) {
-            return Skeletonizer(
-              child: Container(
-                height: height,
-                width: width,
-                color: Colors.grey,
-              ),
-            );
-          },
-        ),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(Measurements.defaultBorderRadius),
+      child: CachedNetworkImage(
+        imageUrl: imageUrl,
+        height: height,
+        width: width,
+        placeholder: (context, url) {
+          return Skeletonizer(
+            child: Container(
+              height: height,
+              width: width,
+              color: Colors.grey,
+            ),
+          );
+        },
       ),
     );
   }
