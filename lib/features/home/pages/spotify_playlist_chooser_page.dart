@@ -63,7 +63,7 @@ class SpotifyPlaylistChooserPage extends StatelessWidget {
                         final currentPlaylistPreviews = Get.find<DataService>().playlistPreviews;
 
                         final bool alreadyInCurrent = currentPlaylistPreviews.any((e) => e.spotifyId == playlistPreview.spotifyId);
-                        if (alreadyInCurrent) return Container();
+                        if (alreadyInCurrent) return const SizedBox();
 
                         return PlaylistPreviewTile(
                           playlistPreview: playlistPreviews.elementAt(index),

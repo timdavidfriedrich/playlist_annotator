@@ -10,13 +10,16 @@ class SkeletonSongTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: Measurements.minimalPadding + Measurements.smallPadding),
       child: ListTile(
-        leading: Container(
+        leading: SizedBox(
+          width: 50,
+          height: 50,
+          child: DecoratedBox(
             decoration: BoxDecoration(
-              color: Colors.grey,
+              color: Theme.of(context).hintColor,
               borderRadius: BorderRadius.circular(Measurements.defaultBorderRadius),
             ),
-            width: 50,
-            height: 50),
+          ),
+        ),
         title: Text("app_title".tr),
         subtitle: Text("error_label".tr),
         trailing: const Icon(Icons.expand_more_rounded),

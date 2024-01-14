@@ -44,12 +44,16 @@ class _RatingButtonState extends State<RatingButton> {
               children: [
                 GestureDetector(
                   onTap: hideRatingOverlay,
-                  child: Container(color: Colors.black.withOpacity(0.3)),
+                  child: SizedBox.expand(
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(color: Colors.black.withOpacity(0.3)),
+                    ),
+                  ),
                 ),
                 Positioned(
                   top: parentPosition.dy - parentSize.height - Measurements.minimalPadding,
                   left: parentPosition.dx - parentSize.width,
-                  child: Container(
+                  child: DecoratedBox(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(Measurements.defaultBorderRadius),
                       color: Theme.of(context).colorScheme.surface,

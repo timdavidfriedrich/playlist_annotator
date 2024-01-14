@@ -38,10 +38,12 @@ class CoverImage extends StatelessWidget {
               width: width,
               placeholder: (context, url) {
                 return Skeletonizer(
-                  child: Container(
+                  child: SizedBox(
                     height: height,
                     width: width,
-                    color: Colors.grey,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(color: Theme.of(context).hintColor),
+                    ),
                   ),
                 );
               },

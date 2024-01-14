@@ -13,41 +13,39 @@ class AnnotationRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool hasRating = ![null, 0].contains(annotation.rating);
     final bool hasComment = annotation.comment != null && annotation.comment!.isNotEmpty;
-    if (!hasRating && !hasComment) return Container();
+    if (!hasRating && !hasComment) return const SizedBox();
     final bool isCurrentUser = Get.find<UserService>().currentUser.value?.spotifyId == annotation.userSpotifyId;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: Measurements.minimalPadding),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                annotation.userName,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: isCurrentUser ? null : Theme.of(context).hintColor,
-                ),
+      child: RichText(
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: annotation.userName,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: isCurrentUser ? null : Theme.of(context).hintColor,
               ),
-              const SizedBox(width: Measurements.minimalPadding),
-              if (![null, 0].contains(annotation.rating))
-                RatingIcon.fromInt(
+            ),
+            const WidgetSpan(child: SizedBox(width: Measurements.minimalPadding)),
+            if (![null, 0].contains(annotation.rating))
+              WidgetSpan(
+                alignment: PlaceholderAlignment.middle,
+                child: RatingIcon.fromInt(
                   annotation.rating!,
                   size: Theme.of(context).textTheme.labelMedium?.fontSize,
                   color: isCurrentUser ? null : Theme.of(context).hintColor,
                 ).icon,
-            ],
-          ),
-          const SizedBox(width: Measurements.smallPadding),
-          if (annotation.comment != null)
-            Flexible(
-              child: Text(
-                annotation.comment!,
+              ),
+            const WidgetSpan(child: SizedBox(width: Measurements.smallPadding)),
+            // const TextSpan(text: "\n"),
+            if (annotation.comment != null && annotation.comment!.isNotEmpty)
+              TextSpan(
+                text: annotation.comment!,
                 style: TextStyle(color: Theme.of(context).hintColor),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }
