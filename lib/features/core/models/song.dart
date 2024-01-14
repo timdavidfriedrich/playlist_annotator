@@ -3,7 +3,7 @@ class Song {
   final String spotifyId;
   final String name;
   final String artist;
-  final String imageUrl;
+  final String? imageUrl;
 
   Song({
     required this.id,
@@ -15,8 +15,8 @@ class Song {
 
   Song.fromSpotify(Map<String, dynamic> track)
       : id = "SONG_NOT_UPLOADED_YET",
-        spotifyId = track['id'],
+        spotifyId = track['id'] ?? "NO_SPOTIFY_ID",
         name = track['name'],
         artist = track['artists'].map((artist) => artist['name']).join(', '),
-        imageUrl = track['album']['images'][0]['url'];
+        imageUrl = (track['album']['images'] as List).isNotEmpty ? track['album']['images'][0]['url'] : null;
 }
