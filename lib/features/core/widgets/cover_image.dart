@@ -4,10 +4,10 @@ import 'package:playlist_annotator/constants/measurements.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class CoverImage extends StatelessWidget {
-  final String imageUrl;
+  final String? imageUrl;
   final double? height;
   final double? width;
-  const CoverImage({super.key, required this.imageUrl, this.height, this.width});
+  const CoverImage({super.key, this.imageUrl, this.height, this.width});
 
   @override
   Widget build(BuildContext context) {
@@ -24,20 +24,28 @@ class CoverImage extends StatelessWidget {
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(Measurements.defaultBorderRadius),
-      child: CachedNetworkImage(
-        imageUrl: imageUrl,
-        height: height,
-        width: width,
-        placeholder: (context, url) {
-          return Skeletonizer(
-            child: Container(
+      child: imageUrl == null
+          ? SizedBox(
               height: height,
               width: width,
-              color: Colors.grey,
+              child: DecoratedBox(
+                decoration: BoxDecoration(color: Theme.of(context).hintColor),
+              ),
+            )
+          : CachedNetworkImage(
+              imageUrl: imageUrl!,
+              height: height,
+              width: width,
+              placeholder: (context, url) {
+                return Skeletonizer(
+                  child: Container(
+                    height: height,
+                    width: width,
+                    color: Colors.grey,
+                  ),
+                );
+              },
             ),
-          );
-        },
-      ),
     );
   }
 }
