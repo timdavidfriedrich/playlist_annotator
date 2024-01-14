@@ -47,14 +47,15 @@ class PocketbaseService extends GetxService {
   }
 
   Future<RecordAuth?> signInWithSpotify() async {
-    final authData = await pocketbase.collection('users').authWithOAuth2('spotify', (uri) async {
+    RecordAuth? authData = await pocketbase.collection('users').authWithOAuth2('spotify', (uri) async {
       await launchUrl(uri);
-    }).catchError((e) {
-      Log.error(e);
-      return RecordAuth();
-    }).then((RecordAuth response) async {
+    }).then((RecordAuth? response) async {
+      if (response == null) return null;
       await _updateRecordIfNecessary(response);
       return response;
+    }).catchError((e) {
+      Log.error(e);
+      return null;
     });
 
     return authData;
@@ -63,7 +64,9 @@ class PocketbaseService extends GetxService {
   Future<void> _updateRecordIfNecessary(RecordAuth response) async {
     if (response.record == null) return;
 
+    Log.debug("_updateRecordIfNecessary");
     final user = await pocketbase.collection("users").getOne(response.record!.id);
+    Log.debug("user: $user");
 
     final String username = response.meta["id"];
     final String name = response.meta["name"];
@@ -88,7 +91,7 @@ class PocketbaseService extends GetxService {
     final UserService userService = Get.find();
     String? userId = userService.currentUser.value?.id;
     // TODO: Add filter
-    final subscription = await pocketbase.collection('playlistPreviews').subscribe("*", filter: "annotators ~ \"$userId\"", (event) {
+    final subscription = await pocketbase.collection('playlistPreviews').subscribe("*", filter: "\"$userId\" ?= annotators.id", (event) {
       Log.debug("event: ${event.record}");
     });
     return subscription;
@@ -98,7 +101,7 @@ class PocketbaseService extends GetxService {
     final UserService userService = Get.find();
     String? userId = userService.currentUser.value?.id;
     // TODO: Replace getFullList(..) with getList(..)
-    final playlistPreviews = await pocketbase.collection('playlistPreviews').getFullList(filter: "annotators ~\"$userId\"");
+    final playlistPreviews = await pocketbase.collection('playlistPreviews').getFullList(filter: "\"$userId\" ?= annotators.id");
     return playlistPreviews.map((record) => PlaylistPreview.fromPocketbaseRecord(record)).toList();
   }
 
