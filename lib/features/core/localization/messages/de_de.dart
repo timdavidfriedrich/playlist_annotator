@@ -12,13 +12,19 @@ const Map<String, String> deDE = {
   "add_playlist_label": "Playlist hinzufügen",
   "remove_label": "Entfernen",
   "remove_playlist_label": "Playlist entfernen",
+  "annotator_list_label": "Annotatoren",
+  "share_my_global_annotations_label": "Meine globalen Anmerkungen teilen",
+  "share_my_global_annotations_description":
+      "Wenn aktiviert, können andere Playlist-Annotatoren deine globalen Song-Anmerkungen sehen - aber nur für diese Playlist.",
   "keep_annotations_after_deletion_label": "Anmerkungen behalten",
-  "keep_annotations_after_deletion_explanation_label":
+  "keep_annotations_after_deletion_description":
       "Wenn aktiviert, werden die Anmerkungen noch da sein, wenn du diese Playlist erneut hinzufügst.",
   "playlist_uri_label": "Playlist URI",
   "sign_in_spotify_label": "Mit Spotify anmelden",
+  "unnamed_label": "Unbenannt",
   "unknown_author_label": "Unbekannter Autor",
   "song_count_label": "@count Songs",
+  "mark_all_as_read_label": "Alle als gelesen markieren",
   "collapse_all_label": "Alle einklappen",
   "expand_all_label": "Alle ausklappen",
   "no_annotations_label": "Noch keine Anmerkungen.",

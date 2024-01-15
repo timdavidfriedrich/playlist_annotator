@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:playlist_annotator/constants/measurements.dart';
@@ -26,7 +27,8 @@ class SettingsPage extends StatelessWidget {
           if (currentUser != null)
             ListTile(
               leading: CircleAvatar(
-                backgroundImage: NetworkImage(currentUser.avatarUrl),
+                backgroundColor: Theme.of(context).hintColor,
+                backgroundImage: currentUser.avatarUrl == null ? null : CachedNetworkImageProvider(currentUser.avatarUrl!),
               ),
               title: Text(currentUser.name),
               subtitle: Text(currentUser.spotifyId),
