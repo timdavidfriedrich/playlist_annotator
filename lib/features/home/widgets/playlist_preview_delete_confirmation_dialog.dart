@@ -27,7 +27,7 @@ class _PlaylistPreviewDeleteConfirmationDialogState extends State<PlaylistPrevie
     setState(() => _isRemoving = true);
 
     if (!_keepAnnotationsAfterDeletion) {
-      await _removeAllLocalAnnotationsByPlaylistSpotifyId(playlistPreview.spotifyId);
+      await _removeAllLocalAnnotationsByPlaylistSpotifyId(playlistPreview);
     }
 
     await Get.find<PocketbaseService>().removePlaylistPreviewById(playlistPreview.id);
@@ -36,9 +36,9 @@ class _PlaylistPreviewDeleteConfirmationDialogState extends State<PlaylistPrevie
     Get.back();
   }
 
-  Future<void> _removeAllLocalAnnotationsByPlaylistSpotifyId(String spotifyId) async {
+  Future<void> _removeAllLocalAnnotationsByPlaylistSpotifyId(PlaylistPreview playlistPreview) async {
     final PocketbaseService pocketbaseService = Get.find<PocketbaseService>();
-    final List<Annotation> localAnnotations = await pocketbaseService.getLocalAnnotationsByPlaylistSpotifyId(spotifyId);
+    final List<Annotation> localAnnotations = await pocketbaseService.getLocalAnnotationsByPlaylistPreview(playlistPreview);
 
     for (var annotation in localAnnotations) {
       await pocketbaseService.removeLocalAnnotationById(annotation.id);
