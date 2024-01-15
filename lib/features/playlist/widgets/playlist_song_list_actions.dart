@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import 'package:playlist_annotator/features/core/models/playlist.dart';
 import 'package:playlist_annotator/features/playlist/controller/selected_song_controller.dart';
 
-class PlaylistInfoRow extends StatelessWidget {
+class PlaylistSongListActions extends StatelessWidget {
   final Playlist playlist;
-  const PlaylistInfoRow({super.key, required this.playlist});
+  const PlaylistSongListActions({super.key, required this.playlist});
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +16,6 @@ class PlaylistInfoRow extends StatelessWidget {
     return Obx(
       () => Row(
         children: [
-          Text(playlist.ownerSpotifyNames),
-          const Text(" • "),
           Text("song_count_label".trParams({"count": "${playlist.songs.length}"})),
           const Spacer(),
           TextButton(

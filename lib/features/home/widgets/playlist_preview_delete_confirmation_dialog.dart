@@ -62,7 +62,7 @@ class _PlaylistPreviewDeleteConfirmationDialogState extends State<PlaylistPrevie
           ListTile(
             contentPadding: EdgeInsets.zero,
             title: Text("keep_annotations_after_deletion_label".tr),
-            subtitle: Text("keep_annotations_after_deletion_explanation_label".tr),
+            subtitle: Text("keep_annotations_after_deletion_description".tr),
             trailing: Switch.adaptive(
               value: _keepAnnotationsAfterDeletion,
               onChanged: _setKeepAnnotationsAfterDeletion,

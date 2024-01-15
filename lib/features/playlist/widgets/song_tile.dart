@@ -24,7 +24,7 @@ class _SongTileState extends State<SongTile> {
     return Stack(
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: Measurements.minimalPadding + Measurements.smallPadding),
+          padding: const EdgeInsets.only(left: Measurements.minimalPadding + Measurements.minimalPadding),
           child: SongTileExpansionTile(
             song: widget.song,
             localAnnotations: localAnnotations,

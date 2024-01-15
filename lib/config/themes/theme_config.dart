@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:playlist_annotator/constants/measurements.dart';
 
 class ThemeConfig {
@@ -49,10 +48,6 @@ class ThemeConfig {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(Measurements.defaultBorderRadius),
         ),
-        subtitleTextStyle: GoogleFonts.poppins(
-          fontSize: Theme.of(context).textTheme.labelMedium?.fontSize,
-          color: colorScheme.onSurface.withOpacity(0.5),
-        ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
@@ -65,26 +60,6 @@ class ThemeConfig {
         applyThemeToAll: true,
         barBackgroundColor: colorScheme.background,
         scaffoldBackgroundColor: colorScheme.background,
-      ),
-      textTheme: GoogleFonts.poppinsTextTheme(
-        TextTheme(
-          displayLarge: const TextStyle(
-            fontWeight: FontWeight.w500,
-          ),
-          bodySmall: TextStyle(
-            color: colorScheme.onSurface.withOpacity(0.5),
-          ),
-          titleLarge: TextStyle(
-            fontSize: Theme.of(context).textTheme.titleLarge!.fontSize! * 1.25,
-            fontWeight: FontWeight.w600,
-          ),
-          titleMedium: const TextStyle(
-            fontWeight: FontWeight.w600,
-          ),
-          titleSmall: const TextStyle(
-            fontWeight: FontWeight.w600,
-          ),
-        ),
       ),
     );
   }

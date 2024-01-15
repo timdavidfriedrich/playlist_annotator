@@ -92,19 +92,23 @@ class SongTileExpansionTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ListTile(
-              title: Text(song.name),
-              onTap: toggleExpansion,
-              subtitle: Text(
-                song.artist,
-                style: TextStyle(color: Theme.of(context).hintColor),
-              ),
               shape: RoundedRectangleBorder(
                 borderRadius: isExpanded
                     ? const BorderRadius.vertical(top: Radius.circular(Measurements.defaultBorderRadius))
                     : BorderRadius.circular(Measurements.defaultBorderRadius),
               ),
               tileColor: isExpanded ? Theme.of(context).colorScheme.surfaceVariant : null,
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: Measurements.normalPadding,
+                vertical: Measurements.minimalPadding,
+              ),
+              onTap: toggleExpansion,
               leading: CoverImage(imageUrl: song.imageUrl),
+              title: Text(song.name),
+              subtitle: Text(
+                song.artist,
+                style: TextStyle(color: Theme.of(context).hintColor),
+              ),
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
