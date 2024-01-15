@@ -93,7 +93,10 @@ class PlaylistPage extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: Measurements.normalPadding),
                     shrinkWrap: true,
                     children: [
-                      const SkeletonPlaylistInfoRow(),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: Measurements.normalPadding),
+                        child: SkeletonPlaylistInfoRow(),
+                      ),
                       const SizedBox(height: Measurements.normalPadding),
                       ...List.generate(4, (index) {
                         return const Padding(
