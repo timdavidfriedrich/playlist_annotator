@@ -111,6 +111,7 @@ class PlaylistPage extends StatelessWidget {
               (playlist, localAnnotations) = snapshot.data!;
 
               if (playlist == null) return Center(child: Text("${"error_label".tr}: ${snapshot.error}"));
+
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -119,17 +120,23 @@ class PlaylistPage extends StatelessWidget {
                     child: PlaylistInfoRow(playlist: playlist),
                   ),
                   const SizedBox(height: Measurements.normalPadding),
-                  for (int index = 0; index < playlist.songs.length; index++)
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: Measurements.normalPadding,
-                        vertical: Measurements.minimalPadding,
-                      ),
-                      child: SongTile(
-                        song: playlist.songs.elementAt(index),
-                        localAnnotations: localAnnotations,
-                      ),
-                    ),
+                  ListView.builder(
+                    itemCount: playlist.songs.length,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: Measurements.normalPadding,
+                          vertical: Measurements.minimalPadding,
+                        ),
+                        child: SongTile(
+                          song: playlist!.songs.elementAt(index),
+                          localAnnotations: localAnnotations,
+                        ),
+                      );
+                    },
+                  ),
                   const SizedBox(height: Measurements.largePadding),
                 ],
               );
