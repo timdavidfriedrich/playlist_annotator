@@ -87,6 +87,17 @@ class PocketbaseService extends GetxService {
     }
   }
 
+  Future<User?> getUserFromId(String id) async {
+    RecordModel? record;
+    try {
+      record = await pocketbase.collection('users').getOne(id);
+    } catch (e) {
+      Log.error(e);
+    }
+    if (record == null) return null;
+    return User.fromPocketbaseRecord(record);
+  }
+
   Future<Function()> subscribePlaylistPreviews() async {
     final UserService userService = Get.find();
     String? userId = userService.currentUser.value?.id;
