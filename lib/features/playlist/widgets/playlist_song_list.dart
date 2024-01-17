@@ -12,29 +12,31 @@ class PlaylistSongList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: playlist.songs.length + 1,
+    return ListView.custom(
       shrinkWrap: true,
       padding: const EdgeInsets.symmetric(horizontal: Measurements.normalPadding),
       physics: const NeverScrollableScrollPhysics(),
-      itemBuilder: (context, index) {
-        if (index == 0) {
+      childrenDelegate: SliverChildBuilderDelegate(
+        (context, index) {
+          if (index == 0) {
+            return Padding(
+              padding: const EdgeInsets.only(
+                left: Measurements.normalPadding + Measurements.minimalPadding,
+                right: Measurements.smallPadding,
+              ),
+              child: PlaylistSongListActions(playlist: playlist),
+            );
+          }
           return Padding(
-            padding: const EdgeInsets.only(
-              left: Measurements.normalPadding + Measurements.minimalPadding,
-              right: Measurements.smallPadding,
+            padding: const EdgeInsets.only(bottom: Measurements.minimalPadding),
+            child: SongTile(
+              song: playlist.songs.elementAt(index - 1),
+              localAnnotations: localAnnotations,
             ),
-            child: PlaylistSongListActions(playlist: playlist),
           );
-        }
-        return Padding(
-          padding: const EdgeInsets.only(bottom: Measurements.minimalPadding),
-          child: SongTile(
-            song: playlist.songs.elementAt(index - 1),
-            localAnnotations: localAnnotations,
-          ),
-        );
-      },
+        },
+        childCount: playlist.songs.length + 1,
+      ),
     );
   }
 }
