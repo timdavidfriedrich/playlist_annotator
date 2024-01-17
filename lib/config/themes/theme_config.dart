@@ -39,6 +39,10 @@ class ThemeConfig {
         centerTitle: false,
       ),
       scaffoldBackgroundColor: colorScheme.background,
+      snackBarTheme: SnackBarThemeData(
+        backgroundColor: colorScheme.surface,
+        contentTextStyle: TextStyle(color: colorScheme.onSurface),
+      ),
       cardColor: colorScheme.surface,
       cardTheme: const CardTheme(
         elevation: 0,
