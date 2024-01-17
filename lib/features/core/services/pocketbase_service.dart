@@ -6,6 +6,8 @@ import 'package:playlist_annotator/constants/links.dart';
 import 'package:playlist_annotator/features/core/models/annotation.dart';
 import 'package:playlist_annotator/features/core/models/playlist_preview.dart';
 import 'package:playlist_annotator/features/core/models/user.dart';
+import 'package:playlist_annotator/features/core/resources/data_state.dart';
+import 'package:playlist_annotator/features/core/resources/exceptions/playlist_exception.dart';
 import 'package:playlist_annotator/features/core/services/local_storage_service.dart';
 import 'package:playlist_annotator/features/core/services/user_service.dart';
 import 'package:pocketbase/pocketbase.dart';
@@ -118,6 +120,43 @@ class PocketbaseService extends GetxService {
 
   Future<RecordModel> addPlaylistPreview(PlaylistPreview playlistPreview) async {
     return await pocketbase.collection('playlistPreviews').create(body: playlistPreview.toPocketbaseRecord());
+  }
+
+  Future<DataState<RecordModel?>> addUserToPlaylistPreview(String playlistPreviewId) async {
+    try {
+      final UserService userService = Get.find<UserService>();
+      final String userId = userService.currentUser.value!.id;
+
+      final playlistPreview = await pocketbase.collection('playlistPreviews').getOne(playlistPreviewId);
+
+      if (playlistPreview.data["annotators"] != null) {
+        final List<dynamic> annotatorIds = playlistPreview.data["annotators"];
+
+        if (annotatorIds.contains(userId)) {
+          return DataStateError<RecordModel?>(
+            JoinPlaylistException(JoinPlaylistExceptionType.alreadyJoined),
+          );
+        }
+      }
+
+      return DataStateSuccess(
+        await pocketbase.collection('playlistPreviews').update(
+          playlistPreviewId,
+          body: {
+            "annotators": [...playlistPreview.data["annotators"], userId]
+          },
+        ),
+      );
+    } on PlaylistException {
+      return DataStateError<RecordModel?>(
+        JoinPlaylistException(JoinPlaylistExceptionType.notFound),
+      );
+    } catch (e) {
+      Log.error(e);
+      return DataStateError<RecordModel?>(
+        JoinPlaylistException(JoinPlaylistExceptionType.unknown),
+      );
+    }
   }
 
   Future<void> removePlaylistPreviewById(String id) async {

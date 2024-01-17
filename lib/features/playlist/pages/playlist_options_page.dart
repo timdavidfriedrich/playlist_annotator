@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_utils/get_utils.dart';
+import 'package:get/get.dart';
 import 'package:playlist_annotator/constants/measurements.dart';
 import 'package:playlist_annotator/features/core/models/playlist_preview.dart';
 import 'package:playlist_annotator/features/playlist/widgets/annotator_list_tile.dart';
+import 'package:playlist_annotator/features/playlist/widgets/playlist_invitation_dialog.dart';
 
 class PlaylistOptionsPage extends StatelessWidget {
   final PlaylistPreview playlistPreview;
@@ -10,6 +11,10 @@ class PlaylistOptionsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void sharePlaylist() {
+      Get.dialog(PlaylistInvitationDialog(playlistPreview: playlistPreview));
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(playlistPreview.name),
@@ -23,6 +28,14 @@ class PlaylistOptionsPage extends StatelessWidget {
             AnnotatorListTile(
               annotatorId: annotatorId,
             ),
+          ListTile(
+            onTap: sharePlaylist,
+            leading: CircleAvatar(
+              backgroundColor: Theme.of(context).colorScheme.surfaceTint,
+              child: Icon(Icons.adaptive.share),
+            ),
+            title: Text("share_playlist_label".tr),
+          ),
         ],
       ),
     );

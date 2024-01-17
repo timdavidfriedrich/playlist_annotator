@@ -1,4 +1,6 @@
 class Measurements {
+  Measurements._();
+
   static const double defaultBorderRadius = 8.0;
 
   static const double largePadding = 48;

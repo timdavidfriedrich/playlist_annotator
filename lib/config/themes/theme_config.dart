@@ -52,7 +52,10 @@ class ThemeConfig {
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: colorScheme.surfaceTint,
-        border: const OutlineInputBorder(borderSide: BorderSide.none),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(Measurements.defaultBorderRadius),
+          borderSide: BorderSide.none,
+        ),
         alignLabelWithHint: true,
       ),
       cupertinoOverrideTheme: CupertinoThemeData(

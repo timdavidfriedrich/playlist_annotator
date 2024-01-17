@@ -4,6 +4,7 @@ import 'package:playlist_annotator/constants/measurements.dart';
 import 'package:playlist_annotator/features/core/models/playlist_preview.dart';
 import 'package:playlist_annotator/features/core/services/data_service.dart';
 import 'package:playlist_annotator/features/core/services/spotify_service.dart';
+import 'package:playlist_annotator/features/home/widgets/playlist_preview_add_by_code_row.dart';
 import 'package:playlist_annotator/features/home/widgets/playlist_preview_tile.dart';
 
 class SpotifyPlaylistChooserPage extends StatelessWidget {
@@ -11,8 +12,6 @@ class SpotifyPlaylistChooserPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController uriController = TextEditingController();
-
     Future<List<PlaylistPreview>> getPlaylists() async {
       SpotifyService spotifyService = Get.find();
       final token = await spotifyService.getAccessToken();
@@ -24,10 +23,6 @@ class SpotifyPlaylistChooserPage extends StatelessWidget {
       Get.back(result: playlist);
     }
 
-    void returnPlaylistFromUri() {
-      Get.back(result: uriController.text);
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: Text("add_playlist_label".tr),
@@ -36,14 +31,9 @@ class SpotifyPlaylistChooserPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: Measurements.normalPadding),
         child: Column(
           children: [
-            // const SizedBox(height: Measurements.normalPadding),
-            // TextField(
-            //   controller: uriController,
-            //   decoration: InputDecoration(
-            //     labelText: "playlist_uri_label".tr,
-            //   ),
-            // ),
-            // const SizedBox(height: Measurements.normalPadding),
+            const SizedBox(height: Measurements.normalPadding),
+            const PlaylistPreviewAddByCodeRow(),
+            const SizedBox(height: Measurements.normalPadding),
             Expanded(
               child: FutureBuilder(
                 future: getPlaylists(),
