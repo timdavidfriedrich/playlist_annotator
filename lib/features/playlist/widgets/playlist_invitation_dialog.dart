@@ -16,7 +16,7 @@ class PlaylistInvitationDialog extends StatelessWidget {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text("playlist_id_has_been_copied_label".tr),
+          content: Text("playlist_code_has_been_copied_label".tr),
           duration: const Duration(seconds: 5),
         ),
       );
