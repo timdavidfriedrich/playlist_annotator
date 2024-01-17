@@ -36,6 +36,7 @@ class CoverImage extends StatelessWidget {
               imageUrl: imageUrl!,
               height: height,
               width: width,
+              filterQuality: FilterQuality.none,
               placeholder: (context, url) {
                 return Skeletonizer(
                   child: SizedBox(
